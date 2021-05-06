@@ -1,0 +1,54 @@
+<ion-header>  
+  <ion-toolbar color="emerald">
+    <ion-buttons  slot="start">
+      <ion-back-button defaultHref= '/consumer-home'></ion-back-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="validations_form" (ngSubmit)="loginUser(validations_form.value)"> 
+    <ion-card style="border-radius: 5px 50px; padding: 2%;">
+      <ion-card-header> 
+        <ion-card-subtitle>
+          Please enter your details to login
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating" >Email:</ion-label>
+          <ion-input formControlName="email" required></ion-input>
+        </ion-item>
+        <div class="validation-errors" style="text-align: center;" >
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Password:</ion-label>
+          <ion-input type="tel" style="-webkit-text-security:disc;" formControlName="password" class="form-controll" required></ion-input>
+        </ion-item>
+        <div class="validation-errors" style="text-align: center;">
+          <ng-container *ngFor="let validation of validation_messages.password">
+            <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-card-content>
+    </ion-card>
+   
+    <div style="text-align: center;">
+      <ion-button type="submit" style="width:150px; height: 45px; " [disabled]="!validations_form.valid"> Login</ion-button>
+    </div>
+  </form> 
+</ion-content>
+
+<ion-footer color="emerald">
+  <ion-toolbar color="emerald" routerLink="/forget-password" routerDirection= "forward" style="text-align: center; outline: none;">
+    <ion-title>Forgot Password?</ion-title>
+  </ion-toolbar>
+</ion-footer>
