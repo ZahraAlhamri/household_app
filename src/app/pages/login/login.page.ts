@@ -79,9 +79,9 @@ export class LoginPage implements OnInit {
             this.hideLoader();
             this.navCtrl.navigateForward('consumer-home');
           }
-          else if(userProfileSnapshot.data().uType == 'Admin'){
+          else if(userProfileSnapshot.data().uType == 'Merchant'){
             this.hideLoader();
-            this.navCtrl.navigateForward('/Admin-home');
+            this.navCtrl.navigateForward('/merchant-home');
           }
         });
     }, err => {

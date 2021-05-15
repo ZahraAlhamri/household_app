@@ -16,5 +16,9 @@ export class FirestoreService {
     console.log(user);
     return this.db.collection('users').doc(uid).set(user);
   }
+  additem(item){
+    console.log('item here', item);
+    return this.db.collection('items').add(item);
+  }
   
 }

@@ -30,6 +30,14 @@ const routes: Routes = [
   {
     path: 'forget-password',
     loadChildren: () => import('./pages/forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
+  },
+  {
+    path: 'merchant-home',
+    loadChildren: () => import('./pages/merchant-home/merchant-home.module').then( m => m.MerchantHomePageModule)
+  },
+  {
+    path: 'add-item',
+    loadChildren: () => import('./pages/add-item/add-item.module').then( m => m.AddItemPageModule)
   }
 ];
 
