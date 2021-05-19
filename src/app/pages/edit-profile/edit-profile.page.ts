@@ -23,8 +23,10 @@ export class EditProfilePage implements OnInit {
   public category;
   public uploadfile: File;
   public filename;
-  public uimage;
+  public uimage = "../../../assets/images/uimage.png";
   public role;
+  public address;
+  public country;
   url;
 
   validations_form: FormGroup;
@@ -43,10 +45,6 @@ export class EditProfilePage implements OnInit {
       { type: 'required', message: 'Name is required'},
       { type: 'pattern' , message: 'Name must start with an alphabet'}
     ],
-   'name': [
-    { type: 'required', message: 'Name is required'},
-    { type: 'pattern' , message: 'Name must start with an alphabet'}
-    ],
     'phone': [
      { type: 'required', message: 'Phone number is required'},
      { type: 'pattern' , message: 'Enter a valid phone number'},
@@ -55,6 +53,14 @@ export class EditProfilePage implements OnInit {
     ],
      'gender': [
      { type: 'required' , message: 'Gender is required'}
+    ],
+    'country': [
+      { type: 'required', message: 'Name is required'},
+      { type: 'pattern' , message: 'Name must contain alphabet only'}
+    ],
+    'address': [
+      { type: 'required', message: 'address is required'},
+      { type: 'pattern', message: 'Enter a valid Dsecription.' }
     ]
   };
   
@@ -82,6 +88,8 @@ export class EditProfilePage implements OnInit {
             this.phone = userProfileSnapshot.data().phone;
             this.role= userProfileSnapshot.data().uType;
             this.uimage= userProfileSnapshot.data().photo;
+            this.address= userProfileSnapshot.data().address;
+            this.country = userProfileSnapshot.data().country;
             console.log(userProfileSnapshot.data()); 
             localStorage.setItem('uDetails',JSON.stringify(userProfileSnapshot.data()))
             localStorage.setItem('uType',userProfileSnapshot.data().uType);          
@@ -107,6 +115,14 @@ export class EditProfilePage implements OnInit {
         Validators.pattern('^[0-9]+$')
       ])),
       gender: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      country: new FormControl('', Validators.compose([
+        Validators.pattern('^[a-zA-Z][" "a-zA-Z]*[a-zA-Z]$'),
+        Validators.required
+      ])),
+      address: new FormControl('', Validators.compose([
+        Validators.pattern('^[a-zA-Z][" "a-zA-Z0-9 \n]*[a-zA-Z]$'),
         Validators.required
       ])),
     });
@@ -187,6 +203,8 @@ export class EditProfilePage implements OnInit {
             lname:this.lname,
             phone:this.phone,
             gender:this.gender,
+            country:this.country,
+            address:this.address
           }).then(() => {
             this.store();
             this.hideLoader();

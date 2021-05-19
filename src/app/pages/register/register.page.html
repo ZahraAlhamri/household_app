@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons  slot="start">
+      <ion-back-button defaultHref= '/welcome'></ion-back-button>
+    </ion-buttons>
     <ion-title>register</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,7 +17,7 @@
       </ion-card-header>
       <ion-card-content>
         <div>
-          <ion-avatar>
+          <ion-avatar style="margin: auto;">
             <img *ngIf="uimage" [src]="uimage">
           </ion-avatar> 
           <ion-input type="file" (change)="HandleFileSelect($event)"></ion-input>
@@ -90,6 +93,17 @@
         <div class="validation-errors" style="text-align: center;">
           <ng-container *ngFor="let validation of validation_messages.gender">
             <div class="error-message" *ngIf="validations_form.get('gender').hasError(validation.type) && (validations_form.get('gender').dirty || validations_form.get('gender').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Country:</ion-label>
+          <ion-input formControlName="country" class="form-controll" required></ion-input>
+        </ion-item>
+        <div class="validation-errors" style="text-align: center;">
+          <ng-container *ngFor="let validation of validation_messages.country">
+            <div class="error-message" *ngIf="validations_form.get('country').hasError(validation.type) && (validations_form.get('country').dirty || validations_form.get('country').touched)">
               {{ validation.message }}
             </div>
           </ng-container>

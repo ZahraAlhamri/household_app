@@ -21,7 +21,7 @@ export class RegisterPage implements OnInit {
   successMessage: string = '';
   loaderToShow: any;
   number = 0;
-  public uimage = "../../../assets/images/default-user.png";
+  public uimage = "../../../assets/images/uimage.png";
   public uploadfile;
   public filename;
   private message;
@@ -52,9 +52,9 @@ export class RegisterPage implements OnInit {
      'gender': [
      { type: 'required' , message: 'Gender is required'}
     ],
-
-    'status': [
-     { type: 'required' , message: 'Employment status is required'}
+    'country': [
+      { type: 'required', message: 'Name is required'},
+      { type: 'pattern' , message: 'Name must contain alphabet only'}
     ],
   };
 
@@ -96,7 +96,10 @@ export class RegisterPage implements OnInit {
       gender: new FormControl('', Validators.compose([
         Validators.required
       ])),
-
+      country: new FormControl('', Validators.compose([
+        Validators.pattern('^[a-zA-Z][" "a-zA-Z]*[a-zA-Z]$'),
+        Validators.required
+      ])),
     });
   }
   HandleFileSelect(evt){
@@ -158,6 +161,9 @@ export class RegisterPage implements OnInit {
         gender: user.gender,
         uType: 'Consumer',
         phone: user.phone,
+        email: user.email,
+        address: "",
+        country: user.country
       }
   
      this.authService.registerUser(authenticate)

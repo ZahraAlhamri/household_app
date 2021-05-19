@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="validations_form" (ngSubmit)="Save()">
+  <form [formGroup]="validations_form">
 
     <ion-card>
       <ion-card-content>
@@ -72,6 +72,28 @@
             </div>
           </ng-container>
         </div>
+        <ion-item>
+          <ion-label position="floating">Country</ion-label>
+          <ion-input [(ngModel)]="country" formControlName="country" class="form-controll" required></ion-input>
+        </ion-item>
+        <div class="validation-errors" style="text-align: center;">
+          <ng-container *ngFor="let validation of validation_messages.country">
+            <div class="error-message" *ngIf="validations_form.get('country').hasError(validation.type) && (validations_form.get('country').dirty || validations_form.get('country').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Address</ion-label>
+          <ion-textarea [(ngModel)]="address" formControlName="address"></ion-textarea>
+        </ion-item>
+        <div class="validation-errors" style="text-align: center;" >
+          <ng-container *ngFor="let validation of validation_messages.address">
+            <div class="error-message" *ngIf="validations_form.get('address').hasError(validation.type) && (validations_form.get('address').dirty || validations_form.get('address').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
 
       </ion-card-content>
     </ion-card>
@@ -81,7 +103,7 @@
       <label class="success-message">{{successMessage}}</label>
     </div>
     <div style="text-align: center;">
-      <ion-button type="submit" style="width:150px; height: 45px;" [disabled]="!validations_form.valid" >Save</ion-button>
+      <ion-button type="submit" style="width:150px; height: 45px;" [disabled]="!validations_form.valid" (click)="Save()">Save</ion-button>
     </div>
   </form>
 
