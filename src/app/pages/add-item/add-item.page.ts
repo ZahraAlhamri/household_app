@@ -79,7 +79,7 @@ export class AddItemPage implements OnInit {
       this.validations_form = this.formBuilder.group({
         name: new FormControl('', Validators.compose([
           Validators.required,
-          Validators.pattern('^[a-zA-Z][" "a-zA-Z]*[a-zA-Z]$')
+          Validators.pattern('^[a-zA-Z0-9][" "a-zA-Z]*[a-zA-Z]$')
         ])),
         price: new FormControl('', Validators.compose([
           Validators.required,
@@ -87,14 +87,14 @@ export class AddItemPage implements OnInit {
         ])),
         type: new FormControl('', Validators.compose([
           Validators.required,
-          Validators.pattern('^[a-zA-Z][" "a-zA-Z]*[a-zA-Z]$')
+          Validators.pattern('^[a-zA-Z0-9][" "a-zA-Z]*[a-zA-Z]$')
         ])),
         quantity: new FormControl('', Validators.compose([
           Validators.required,
           Validators.pattern('^[0-9]+$')
         ])),
         description: new FormControl('', Validators.compose([
-          Validators.pattern('^[a-zA-Z][" "a-zA-Z0-9 \n]*[a-zA-Z]$')
+          Validators.pattern('^[a-zA-Z0-9][" "a-zA-Z0-9 \n]*[a-zA-Z]$')
         ])),
   
       });
@@ -104,7 +104,20 @@ export class AddItemPage implements OnInit {
       name = this.itemid;
       console.log(name);
       var imageRef = firebase.storage().ref().child("items/"+name);
-      imageRef.put(this.uploadfile);
+      imageRef.put(this.uploadfile).then(
+        res=>{
+          imageRef.getDownloadURL().then(
+            image=>{
+              console.log(image);
+              firebase
+              .firestore()
+              .doc(`/items/${name}`).update({
+                photo:image
+              })
+            }
+          )
+        } 
+      )
       this.hideLoader();
       this.msg = "Item added successfully";
       this.presentToast();
@@ -137,7 +150,8 @@ export class AddItemPage implements OnInit {
         uid: this.uid,
         status: "Available",
         addedDate: this.TodayDate,
-        addedBy:this.uid
+        addedBy:this.uid,
+        rating:0
       }
   
       this.firestore.additem(item)
