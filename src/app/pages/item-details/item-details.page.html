@@ -84,19 +84,19 @@
             </div>
            
             <div style="text-align: center;">
-              <ion-button type="submit" style="width:150px; height: 45px;" [disabled]="!validations_form.valid" (click)="upadteItem()">Update</ion-button>
+              <ion-button type="submit" expand="block" [disabled]="!validations_form.valid" (click)="upadteItem()">Update</ion-button>
             </div>
+            <ion-button *ngIf="uType=='Merchant' && status== 'Available'" expand="block" color="danger" (click)="Delete()">Delete</ion-button>
+            <ion-button *ngIf="uType=='Merchant' && status== 'Unavailable'" expand="block" (click)="Recovery()">Recover</ion-button>
           </ion-card-content>
         </ion-card>
       </form>  
   </ion-card>
-
-  <ion-button *ngIf="uType=='Merchant' && status== 'Available'" (click)="Delete()">Delete</ion-button>
-  <ion-button *ngIf="uType=='Merchant' && status== 'Unavailable'" (click)="Recovery()">Recover</ion-button>
 </ion-content>
 <!---------------------------------------------------------Consumer--------------------------------------------------------->
 <ion-content *ngIf="uType=='Consumer'">
   <ion-card>
+    <br/>
     <ion-avatar style="margin: auto; height: 100px; width: 100px;">
       <img *ngIf="photo" [src]="photo">
       <img *ngIf="photo==null" src="../../../assets/images/item.png">
@@ -118,7 +118,7 @@
         <ion-label>Description: {{description}}</ion-label>
       </ion-item>
     </ion-card-content>
-    <ion-button *ngIf="uType=='Consumer'">add to cart</ion-button>
-    <ion-button *ngIf="uType=='Consumer'">add to wishlist</ion-button>
+    <ion-button *ngIf="uType=='Consumer'" expand="block">add to cart</ion-button>
+    <ion-button *ngIf="uType=='Consumer'" expand="block">add to wishlist</ion-button>
     </ion-card>
 </ion-content>

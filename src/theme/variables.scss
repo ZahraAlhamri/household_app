@@ -3,6 +3,21 @@
 
 /** Ionic CSS Variables **/
 :root {
+  /** Dark  turquoise**/
+  --ion-color-dturquoise: #69bb7b;
+  --ion-color-dturquoise-rgb: 105,187,123;
+  --ion-color-dturquoise-contrast: #000000;
+  --ion-color-dturquoise-contrast-rgb: 0,0,0;
+  --ion-color-dturquoise-shade: #5ca56c;
+  --ion-color-dturquoise-tint: #78c288;
+   /** Light  turquoise**/
+  --ion-color-lturquoise: #86c8be;
+  --ion-color-lturquoise-rgb: 134,200,190;
+  --ion-color-lturquoise-contrast: #000000;
+  --ion-color-lturquoise-contrast-rgb: 0,0,0;
+  --ion-color-lturquoise-shade: #76b0a7;
+  --ion-color-lturquoise-tint: #92cec5;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -74,6 +89,25 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /*Dark turquoise*/
+  .ion-color-dturquoise {
+    --ion-color-base: var(--ion-color-dturquoise);
+    --ion-color-base-rgb: var(--ion-color-dturquoise-rgb);
+    --ion-color-contrast: var(--ion-color-dturquoise-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-dturquoise-contrast-rgb);
+    --ion-color-shade: var(--ion-color-dturquoise-shade);
+    --ion-color-tint: var(--ion-color-dturquoise-tint);
+  }
+  /** Light  turquoise**/
+  .ion-color-lturquoise {
+    --ion-color-base: var(--ion-color-lturquoise);
+    --ion-color-base-rgb: var(--ion-color-lturquoise-rgb);
+    --ion-color-contrast: var(--ion-color-lturquoise-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-lturquoise-contrast-rgb);
+    --ion-color-shade: var(--ion-color-lturquoise-shade);
+    --ion-color-tint: var(--ion-color-lturquoise-tint);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
