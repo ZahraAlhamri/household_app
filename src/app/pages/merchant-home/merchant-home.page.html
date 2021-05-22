@@ -5,5 +5,58 @@
 </ion-header>
 
 <ion-content>
+  <div padding>
+    <ion-segment [(ngModel)]="segment">
+      <ion-segment-button value="Available">
+        Available Items
+      </ion-segment-button>
+      <ion-segment-button value="Unavailable">
+        Unavailable Items
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  
+  <div [ngSwitch]="segment">
+    <ion-list *ngSwitchCase="'Available'">
+      <ion-card *ngFor="let item of items" routerLink= '/item-details/{{item.id}}' >
+        <ion-card-content *ngIf="item.status=='Available'"> 
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-avatar style="margin: auto;">
+                  <img *ngIf="item.photo" [src]="item.photo">
+                  <img *ngIf="item.photo==null" src="../../../assets/images/item.png">
+                </ion-avatar> 
+              </ion-col>
+              <ion-col>
+                {{item.name}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+    <ion-list *ngSwitchCase="'Unavailable'">
+      <ion-card *ngFor="let item of items" routerLink= '/item-details/{{item.id}}' >
+        <ion-card-content *ngIf="item.status=='Unavailable'"> 
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-avatar style="margin: auto;">
+                  <img *ngIf="item.photo" [src]="item.photo">
+                  <img *ngIf="item.photo==null" src="../../../assets/images/item.png">
+                </ion-avatar> 
+              </ion-col>
+              <ion-col>
+                {{item.name}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </div>
+    
+ 
   <ion-button routerLink="/add-item" routerDirection= "forward">add item</ion-button>
 </ion-content>

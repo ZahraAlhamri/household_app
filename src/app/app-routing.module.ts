@@ -40,8 +40,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-item/add-item.module').then( m => m.AddItemPageModule)
   },
   {
+    path: 'updat-item',
+    loadChildren: () => import('./updat-item/updat-item.module').then( m => m.UpdatItemPageModule)
+  },
+  {
     path: 'item-details/:id',
-    loadChildren: () => import('./item-details/item-details.module').then( m => m.ItemDetailsPageModule)
+    loadChildren: () => import('./pages/item-details/item-details.module').then( m => m.ItemDetailsPageModule)
   }
 ];
 

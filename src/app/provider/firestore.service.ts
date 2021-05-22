@@ -42,4 +42,23 @@ export class FirestoreService {
     console.log(id);
     return this.db.collection<any>('items').doc(id);
   }
+  deletItem(id){
+    return this.db.collection('items').doc(id).update({"status": "Unavailable"});
+  }
+  recoveryItem(id){
+    return this.db.collection('items').doc(id).update({"status": "Available"});
+  }
+  updateItem(id,name,type,price,quantity, description,updatedDate){
+    return this.db.collection('items').doc(id).update(
+      {
+        "name" : name,
+        "type" : type,
+        "price" : price,
+        "quantity": quantity,
+        "description": description,
+        "updatedDate": updatedDate
+
+      }
+    );
+  }
 }

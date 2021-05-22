@@ -31,10 +31,13 @@ export class AddItemPage implements OnInit {
   long;
   kutti = "Ramsi";
   cooked;
-  public uimage = "../../../assets/images/default-food.png";
+  //public uimage = "../../../assets/images/default-food.png";
   public uploadfile;
   public filename;
   msg;
+  photo="../../../assets/images/item.png";
+  uType;
+
   TodayDate= new Date();
 
   validation_messages = {
@@ -73,9 +76,8 @@ export class AddItemPage implements OnInit {
     public toastController: ToastController) { }
 
     ngOnInit() {
-      
       this.uid = localStorage.getItem("uid")
-  
+      this.uType = localStorage.getItem('uType');
       this.validations_form = this.formBuilder.group({
         name: new FormControl('', Validators.compose([
           Validators.required,
@@ -108,6 +110,7 @@ export class AddItemPage implements OnInit {
         res=>{
           imageRef.getDownloadURL().then(
             image=>{
+              this.photo=image;
               console.log(image);
               firebase
               .firestore()
@@ -128,7 +131,7 @@ export class AddItemPage implements OnInit {
         let reader = new FileReader();
   
         reader.onload = (event:any) => {
-          this.uimage = event.target.result;
+          this.photo = event.target.result;
         }
         reader.readAsDataURL(evt.target.files[0]);
       }
