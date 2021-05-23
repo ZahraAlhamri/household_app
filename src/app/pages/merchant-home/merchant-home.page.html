@@ -6,7 +6,7 @@
 
 <ion-content>
   <div padding>
-    <ion-segment [(ngModel)]="segment">
+    <ion-segment (ionChange)='changeSeg()' [(ngModel)]="segment">
       <ion-segment-button value="Available">
         Available Items
       </ion-segment-button>
@@ -15,18 +15,42 @@
       </ion-segment-button>
     </ion-segment>
   </div>
-  
+  <ion-item>
+    <ion-searchbar (ionInput)="searchItems($event)" placeholder="search products names" showCancelButton="never" color='light' ></ion-searchbar>
+    <ion-icon (click)="filter()" [name]="filterIcon"></ion-icon>
+  </ion-item>
+  <div *ngIf="showFilter">
+    <ion-item>
+      <ion-label >Quantity:</ion-label>
+      <ion-icon (click)='decQty()' size='small' name="remove-circle-outline"></ion-icon>
+      <div [style]='qtyWidth'>
+        <ion-input style="text-align-last: center;" [(ngModel)]='qtySearch' placeholder='Quantity' (ionInput)='incWidth($event)' class=" ion-no-padding"  type="numeric"></ion-input>
+      </div>
+      <ion-icon (click)='incQty()' size='small' name="add-circle-outline"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price</ion-label>
+      <ion-input [(ngModel)]="priceRange.lower" class="ion-no-margin rangeInput"></ion-input>
+      <ion-range class="ion-no-padding" [(ngModel)]="priceRange" id="price-range" dual-knobs pin color="dark" min="0" [max]="maxPrice">
+      </ion-range>
+      <ion-input [(ngModel)]="priceRange.upper" class="ion-no-margin rangeInput"></ion-input>
+    </ion-item>
+    <div class="centerItems">
+      <ion-button size='small' (click)="saveFilter()">Save</ion-button>
+      <ion-button size='small' color='dturquoise' (click)="resetFilter()">Reset</ion-button>
+    </div>
+  </div>
   <div [ngSwitch]="segment">
     <ion-list *ngSwitchCase="'Available'">
       <ion-card *ngFor="let item of items" routerLink= '/item-details/{{item.id}}' >
-        <ion-card-content *ngIf="item.status=='Available'"> 
+        <ion-card-content *ngIf="item.status=='Available'">
           <ion-grid>
             <ion-row>
               <ion-col>
                 <ion-avatar style="margin: auto;">
                   <img *ngIf="item.photo" [src]="item.photo">
                   <img *ngIf="item.photo==null" src="../../../assets/images/item.png">
-                </ion-avatar> 
+                </ion-avatar>
               </ion-col>
               <ion-col>
                 {{item.name}}
@@ -38,14 +62,14 @@
     </ion-list>
     <ion-list *ngSwitchCase="'Unavailable'">
       <ion-card *ngFor="let item of items" routerLink= '/item-details/{{item.id}}' >
-        <ion-card-content *ngIf="item.status=='Unavailable'"> 
+        <ion-card-content *ngIf="item.status=='Unavailable'">
           <ion-grid>
             <ion-row>
               <ion-col>
                 <ion-avatar style="margin: auto;">
                   <img *ngIf="item.photo" [src]="item.photo">
                   <img *ngIf="item.photo==null" src="../../../assets/images/item.png">
-                </ion-avatar> 
+                </ion-avatar>
               </ion-col>
               <ion-col>
                 {{item.name}}
@@ -56,7 +80,7 @@
       </ion-card>
     </ion-list>
   </div>
-    
- 
+
+
   <ion-button expand="block" routerLink="/add-item" routerDirection= "forward">add item</ion-button>
 </ion-content>
