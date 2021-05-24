@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card >
+    <ion-card-header *ngIf="language=='English'">
+      Select a language
+    </ion-card-header>
+    <ion-card-header *ngIf="language=='عربي'">
+      اختر احدى اللغتين التاليتين
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-select [(ngModel)]="language">
+          <ion-select-option>عربي</ion-select-option>
+          <ion-select-option>English</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div style="text-align: center;" *ngIf="language=='English'">
+        <ion-button type="submit" expand="block"  (click)="Save()">Save</ion-button>
+      </div>
+      <div style="text-align: center;" *ngIf="language=='عربي'">
+        <ion-button type="submit" expand="block"  (click)="Save()">حفظ</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
