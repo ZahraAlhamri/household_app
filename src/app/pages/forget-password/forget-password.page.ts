@@ -8,12 +8,13 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./forget-password.page.scss'],
 })
 export class ForgetPasswordPage implements OnInit {
-
+  public language;
   email;
   msg
   constructor(public toastController : ToastController) { }
 
   ngOnInit() {
+        this.language =localStorage.getItem('language');
   }
 
   sendEmail(){
