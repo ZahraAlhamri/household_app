@@ -35,7 +35,7 @@ export class AddItemPage implements OnInit {
   public uploadfile;
   public filename;
   msg;
-  photo="../../../assets/images/item.png";
+  photo;;
   uType;
 
   TodayDate= new Date();
@@ -102,25 +102,27 @@ export class AddItemPage implements OnInit {
       });
       }
     store(){
-      let name;
-      name = this.itemid;
-      console.log(name);
-      var imageRef = firebase.storage().ref().child("items/"+name);
-      imageRef.put(this.uploadfile).then(
-        res=>{
-          imageRef.getDownloadURL().then(
-            image=>{
-              this.photo=image;
-              console.log(image);
-              firebase
-              .firestore()
-              .doc(`/items/${name}`).update({
-                photo:image
-              })
-            }
-          )
-        } 
-      )
+      if(this.uploadfile){
+        let name;
+        name = this.itemid;
+        console.log(name);
+        var imageRef = firebase.storage().ref().child("items/"+name);
+        imageRef.put(this.uploadfile).then(
+          res=>{
+            imageRef.getDownloadURL().then(
+              image=>{
+                this.photo=image;
+                console.log(image);
+                firebase
+                .firestore()
+                .doc(`/items/${name}`).update({
+                  photo:image
+                })
+              }
+            )
+          } 
+        )
+      }
       this.hideLoader();
       this.msg = "Item added successfully";
       this.presentToast();

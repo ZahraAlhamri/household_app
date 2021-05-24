@@ -73,8 +73,10 @@ export class LoginPage implements OnInit {
           this.successMessage = "Logged in successfully.";
           this.presentSuccessToast();
           //console.log(userProfileSnapshot.data()); 
+          localStorage.setItem('language',userProfileSnapshot.data().language);
           localStorage.setItem('uDetails',JSON.stringify(userProfileSnapshot.data()))
           localStorage.setItem('uType',userProfileSnapshot.data().uType);
+          localStorage.setItem('language',userProfileSnapshot.data().language);
           if(userProfileSnapshot.data().uType == 'Consumer'){
             this.hideLoader();
             this.navCtrl.navigateForward('consumer-home');

@@ -60,7 +60,7 @@ export class EditProfilePage implements OnInit {
     ],
     'address': [
       { type: 'required', message: 'address is required'},
-      { type: 'pattern', message: 'Enter a valid Dsecription.' }
+      { type: 'pattern', message: 'Enter a valid address.' }
     ]
   };
   
@@ -92,7 +92,8 @@ export class EditProfilePage implements OnInit {
             this.country = userProfileSnapshot.data().country;
             console.log(userProfileSnapshot.data()); 
             localStorage.setItem('uDetails',JSON.stringify(userProfileSnapshot.data()))
-            localStorage.setItem('uType',userProfileSnapshot.data().uType);          
+            localStorage.setItem('uType',userProfileSnapshot.data().uType);     
+            localStorage.setItem('language',userProfileSnapshot.data().language);     
           });
       }
     });   
@@ -122,7 +123,7 @@ export class EditProfilePage implements OnInit {
         Validators.required
       ])),
       address: new FormControl('', Validators.compose([
-        Validators.pattern('^[a-zA-Z][" "a-zA-Z0-9 \n]*[a-zA-Z]$'),
+        Validators.pattern('^[a-zA-Z0-9 \n][" "a-zA-Z0-9, \n]*[a-zA-Z0-9]$'),
         Validators.required
       ])),
     });
@@ -139,8 +140,8 @@ export class EditProfilePage implements OnInit {
     toast.present();
     if(this.role == 'Consumer')
       this.navCtrl.navigateForward('/consumer-home');
-    if(this.role == 'Admin')
-      this.navCtrl.navigateForward('/admin-home');
+    if(this.role == 'merchant')
+      this.navCtrl.navigateForward('/merchant-home');
   }
   store(){
     if(this.uploadfile){

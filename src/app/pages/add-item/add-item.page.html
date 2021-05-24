@@ -14,6 +14,7 @@
       <div>
         <ion-avatar style="margin: auto;">
           <img *ngIf="photo" [src]="photo">
+          <img *ngIf="!photo" src="../../../assets/images/item.png">
         </ion-avatar> 
         <ion-input type="file" (change)="HandleFileSelect($event)"></ion-input>
       </div>
@@ -82,7 +83,7 @@
             </div>
            
             <div style="text-align: center;">
-              <ion-button type="submit" style="width:150px; height: 45px;" [disabled]="!validations_form.valid" (click)="Additem(validations_form.value)">Add</ion-button>
+              <ion-button type="submit" expand="block" [disabled]="!validations_form.valid" (click)="Additem(validations_form.value)">Add</ion-button>
             </div>
           </ion-card-content>
         </ion-card>

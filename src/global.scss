@@ -24,3 +24,27 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-button{
+    border-radius: 15px;
+    --width:150px; 
+    --height: 45px;
+    --background:#86c8be;
+  }
+  ion-card{
+    border-radius: 15px;
+  }
+  ion-toolbar{
+    --background:#86c8be;
+    --color:#fff;
+    ion-back-button{
+        color: #fff;
+      }
+  }
+  ion-icon{
+    --color:#86c8be;
+  }
+  ion-menu-button{
+      color: #fff;
+  }
+  

@@ -28,22 +28,18 @@ export class ItemDetailsPage implements OnInit {
   price;
   quantity;
   description;
-  photo;
   msg;
   loaderToShow: any;
   uid;
   status;
+  photo;
    
   successMessage: string = '';
   errorMessage: string = '';
   validations_form: FormGroup;
-  itemid;
-  address;
-  lat;
-  long;
-  kutti = "Ramsi";
-  cooked;
-  public uimage = "../../../assets/images/default-food.png";
+  
+ 
+  
   public uploadfile;
   public filename;
   TodayDate= new Date();
@@ -96,7 +92,7 @@ export class ItemDetailsPage implements OnInit {
         this.price=this.item.price;      
         this.quantity=this.item.quantity;      
         this.description=this.item.description;   
-        this.photo=this.item.photo;   
+        this.photo=this.item.photo; 
         this.status=this.item.status;  
       });
       this.validations_form = this.formBuilder.group({
@@ -125,25 +121,27 @@ export class ItemDetailsPage implements OnInit {
         
   }
   store(){
-    let name;
-    name = this.id;
-    console.log(name);
-    var imageRef = firebase.storage().ref().child("items/"+name);
-    imageRef.put(this.uploadfile).then(
-      res=>{
-        imageRef.getDownloadURL().then(
-          image=>{
-            this.photo=image;
-            console.log(image);
-            firebase
-            .firestore()
-            .doc(`/items/${name}`).update({
-              photo:image
-            })
-          }
-        )
-      } 
-    )
+      if(this.uploadfile){
+      let name;
+      name = this.id;
+      console.log(name);
+      var imageRef = firebase.storage().ref().child("items/"+name);
+      imageRef.put(this.uploadfile).then(
+        res=>{
+          imageRef.getDownloadURL().then(
+            image=>{
+              this.photo=image;
+              console.log(image);
+              firebase
+              .firestore()
+              .doc(`/items/${name}`).update({
+                photo:image
+              })
+            }
+          )
+        } 
+      )
+    }
     this.hideLoader();
     this.msg = "Item added successfully";
     this.presentToast();
@@ -154,7 +152,7 @@ export class ItemDetailsPage implements OnInit {
       let reader = new FileReader();
 
       reader.onload = (event:any) => {
-        this.uimage = event.target.result;
+        this.photo = event.target.result;
       }
       reader.readAsDataURL(evt.target.files[0]);
     }
