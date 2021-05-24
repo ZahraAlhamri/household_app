@@ -49,7 +49,7 @@
               <ion-col>
                 <ion-avatar style="margin: auto;">
                   <img *ngIf="item.photo" [src]="item.photo">
-                  <img *ngIf="item.photo==null" src="../../../assets/images/item.png">
+                  <img *ngIf="!item.photo" src="../../../assets/images/item.png">
                 </ion-avatar>
               </ion-col>
               <ion-col>
@@ -68,7 +68,7 @@
               <ion-col>
                 <ion-avatar style="margin: auto;">
                   <img *ngIf="item.photo" [src]="item.photo">
-                  <img *ngIf="item.photo==null" src="../../../assets/images/item.png">
+                  <img *ngIf="!item.photo" src="../../../assets/images/item.png">
                 </ion-avatar>
               </ion-col>
               <ion-col>
