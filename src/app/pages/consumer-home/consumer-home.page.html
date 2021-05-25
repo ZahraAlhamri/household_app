@@ -38,13 +38,8 @@
         <ion-col>
           <ion-avatar style="margin: auto;">
             <img *ngIf="item.photo" [src]="item.photo">
-<<<<<<< HEAD
-            <img *ngIf="item.photo==null" src="../../../assets/images/item.png">
-          </ion-avatar>
-=======
             <img *ngIf="!item.photo" src="../../../assets/images/item.png">
-          </ion-avatar> 
->>>>>>> 445d81bc5cc8060648b731d76fc6a33cc2f35183
+          </ion-avatar>
         </ion-col>
         <ion-col>
           {{item.name}}

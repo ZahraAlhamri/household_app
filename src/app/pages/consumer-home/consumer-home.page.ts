@@ -37,7 +37,7 @@ export class ConsumerHomePage implements OnInit {
   public categoryFilter="";
   public filterIcon="funnel-outline";
   public showFilter=false;
-  public filteredList;
+  public filteredList=[];
   public originalitems=[];
   // eslint-disable-next-line @typescript-eslint/ban-types
   public priceRange: pRange={lower:0,upper:1000};
@@ -68,12 +68,8 @@ export class ConsumerHomePage implements OnInit {
             this.country = userProfileSnapshot.data().country;
             console.log(userProfileSnapshot.data());
             localStorage.setItem('uDetails',JSON.stringify(userProfileSnapshot.data()))
-<<<<<<< HEAD
             localStorage.setItem('uType',userProfileSnapshot.data().uType);
-=======
-            localStorage.setItem('uType',userProfileSnapshot.data().uType);   
-            localStorage.setItem('language',userProfileSnapshot.data().language);       
->>>>>>> 445d81bc5cc8060648b731d76fc6a33cc2f35183
+            localStorage.setItem('language',userProfileSnapshot.data().language);
           });
           this.firestore.getItems().subscribe(val=>{
             this.items=[];
@@ -81,7 +77,7 @@ export class ConsumerHomePage implements OnInit {
               this.items.push(element);
               this.originalitems.push(element);
               this.maxPrice=(element.price>this.maxPrice)?element.price:this.maxPrice;
-          });this.filteredList={...this.items};this.priceRange.upper=this.maxPrice;
+          });this.filteredList=this.items;this.priceRange.upper=this.maxPrice;
           });
   }
   getItems(ev: any){
@@ -95,10 +91,15 @@ export class ConsumerHomePage implements OnInit {
   saveFilter()
   {
     this.initilizeProducts();
+    if(this.priceRange.upper==this.maxPrice && this.priceRange.lower==this.maxPrice && this.categoryFilter==''){
+      this.filterIcon="funnel-outline";
+    }
+    else{
     this.filterIcon="funnel";
+    }
     let v=this.categoryFilter;
-    this.items=this.items.filter((product)=>{return(product.category.toLowerCase().indexOf(v.toLowerCase())>-1);});
-    this.items=this.items.filter((product)=>{return((product.price>(this.priceRange.lower)) && (product.price<(this.priceRange.upper)));});
+    //this.items=this.items.filter((product)=>{return(product.category.toLowerCase().indexOf(v.toLowerCase())>-1);});
+    this.items=this.items.filter((product)=>{return((product.price>=(this.priceRange.lower)) && (product.price<=(this.priceRange.upper)));});
     this.showFilter=false;
     this.filteredList=this.items;
   }
