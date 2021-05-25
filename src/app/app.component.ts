@@ -21,6 +21,8 @@ export class AppComponent {
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   public selectedIndex = 0;
   public uType = localStorage.getItem('uType');
+  language =localStorage.getItem('language');
+
 /*   public appPages = [
     {
       title: 'Edit Profile',
@@ -70,6 +72,8 @@ export class AppComponent {
     this.uType = localStorage.getItem('uType');
     this.uid = localStorage.getItem('uid');
     this.email = localStorage.getItem('email');
+    this.language =localStorage.getItem('language');
+
     this.username = JSON.parse(localStorage.getItem('uDetails')).fname + " " + JSON.parse(localStorage.getItem('uDetails')).lname;
   }
 

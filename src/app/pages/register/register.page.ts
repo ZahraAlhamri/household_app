@@ -163,6 +163,7 @@ export class RegisterPage implements OnInit {
         phone: user.phone,
         email: user.email,
         address: "",
+        language:"English",
         country: user.country
       }
   
@@ -204,22 +205,6 @@ export class RegisterPage implements OnInit {
     this.loader.dismiss();
   }
  
-  async showInfoAlert(value){
-    let msg;
-    if(value == 'org')
-      msg = 'You\'ll be notified about approval request on this email, so please enter a valid email address. \n Otherwise, request will be rejected. \n This email account will serve as the initial manager of the organization once accpeted. If you\'re not the manager of organization, please ask the manager to register by his email address.'
-    else if(value == 'receiver')
-      msg = 'You\'ll be notified about approval request on this email, so please enter a valid email address. \n Otherwise, request will be rejected. \n Please use the add button to enter details of your family members.'
-
-    const alert = await this.alert.create({
-      header: 'Alert',
-      message: msg,
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
   ionViewDidEnter() {
     this.menuCtrl.enable(false);
   }

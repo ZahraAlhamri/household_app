@@ -16,7 +16,6 @@
       <div>
         <ion-avatar style="margin: auto;">
           <img *ngIf="photo" [src]="photo">
-          <img *ngIf="photo==null" src="../../../assets/images/item.png">
         </ion-avatar> 
         <ion-input type="file" (change)="HandleFileSelect($event)"></ion-input>
       </div>
@@ -100,7 +99,7 @@
     <br/>
     <ion-avatar style="margin: auto; height: 100px; width: 100px;">
       <img *ngIf="photo" [src]="photo">
-      <img *ngIf="photo==null" src="../../../assets/images/item.png">
+      <img *ngIf="!photo" src="../../../assets/images/item.png">
     </ion-avatar> 
     <ion-card-content>
       <ion-item>

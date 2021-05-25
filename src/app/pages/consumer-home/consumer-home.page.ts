@@ -68,7 +68,12 @@ export class ConsumerHomePage implements OnInit {
             this.country = userProfileSnapshot.data().country;
             console.log(userProfileSnapshot.data());
             localStorage.setItem('uDetails',JSON.stringify(userProfileSnapshot.data()))
+<<<<<<< HEAD
             localStorage.setItem('uType',userProfileSnapshot.data().uType);
+=======
+            localStorage.setItem('uType',userProfileSnapshot.data().uType);   
+            localStorage.setItem('language',userProfileSnapshot.data().language);       
+>>>>>>> 445d81bc5cc8060648b731d76fc6a33cc2f35183
           });
           this.firestore.getItems().subscribe(val=>{
             this.items=[];

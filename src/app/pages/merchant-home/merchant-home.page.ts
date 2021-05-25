@@ -70,6 +70,7 @@ export class MerchantHomePage implements OnInit {
             console.log(userProfileSnapshot.data());
             localStorage.setItem('uDetails',JSON.stringify(userProfileSnapshot.data()))
             localStorage.setItem('uType',userProfileSnapshot.data().uType);
+            localStorage.setItem('language',userProfileSnapshot.data().language);
           });
           this.firestore.getItems().subscribe(val=>{
             this.items=[];
