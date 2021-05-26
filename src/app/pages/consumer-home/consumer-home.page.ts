@@ -91,7 +91,7 @@ export class ConsumerHomePage implements OnInit {
     slides.startAutoplay();
   }
 
- 
+
   getItems(ev: any){
     this.items=this.filteredList;
     let v=ev.target.value;
@@ -103,7 +103,7 @@ export class ConsumerHomePage implements OnInit {
   saveFilter()
   {
     this.initilizeProducts();
-    if(this.priceRange.upper==this.maxPrice && this.priceRange.lower==this.maxPrice && this.categoryFilter==""){
+    if(this.priceRange.upper==this.maxPrice && this.priceRange.lower==0 && this.categoryFilter==""){
       this.filterIcon="funnel-outline";
     }
     else{

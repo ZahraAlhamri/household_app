@@ -59,6 +59,7 @@ const routes: Routes = [
     path: 'wishlist',
     loadChildren: () => import('./pages/wishlist/wishlist.module').then( m => m.WishlistPageModule)
   },
+  {
     path: 't-c',
     loadChildren: () => import('./pages/t-c/t-c.module').then( m => m.TCPageModule)
   },
@@ -66,8 +67,6 @@ const routes: Routes = [
     path: 'future',
     loadChildren: () => import('./pages/future/future.module').then( m => m.FuturePageModule)
   }
-
-
 ];
 
 @NgModule({
