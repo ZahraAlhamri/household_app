@@ -59,16 +59,12 @@ export class CartPage implements OnInit {
       console.log('Loading dismissed!');
     }
     delete(i){
-      console.log(localStorage.getItem('uid')+'  '+this.cart[i].id)
       this.firestore.deleteFromCart(localStorage.getItem('uid'),this.cart[i].id);
       if(i==0){
         this.products.splice(i,i+1);
-        this.cart.splice(i,i+1);
       }
       else{
         this.products.splice(i,i);
-        this.cart.splice(i,i);
-        console.log(this.cart[i]+''+this.products[i])
       }
       if(this.cart.length<=0){this.empty=true;}
     }

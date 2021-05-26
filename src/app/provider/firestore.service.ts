@@ -83,7 +83,7 @@ export class FirestoreService {
   }
   addToCart(uid,pid,qty){
     let found=false
-    this.getCart(uid).
+    this.getCart(uid).pipe(take(1)).
           subscribe(res=>{res.forEach(item=>{if(!found){
                 if(item.itemID==pid){
                   this.db.collection('users').doc(uid).collection('cart').doc(item.id).
@@ -129,8 +129,8 @@ deleteFromCart(uid,cartItemID){
           });if(!found)
             this.db.collection('users').doc(uid).collection('wishlist').add({itemID:pid});})
   }
-  deleteFromwishlist(usid,cartItemID){
-    return this.db.collection('users').doc(usid).collection('cart').doc(cartItemID).delete();
+  deleteFromwishlist(usid,ItemID){
+    return this.db.collection('users').doc(usid).collection('wishlist').doc(ItemID).delete();
   }
   updateCart(uid,cartItemID,pid,qty){
     return this.db.collection('users').doc(uid).collection('cart').doc(cartItemID).update({quantity: qty});

@@ -39,17 +39,14 @@ export class WishlistPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
-  delete(i){
+  mdelete(i){
     console.log(localStorage.getItem('uid')+'  '+this.wishlist[i].id)
     this.firestore.deleteFromwishlist(localStorage.getItem('uid'),this.wishlist[i].id);
     if(i==0){
       this.products.splice(i,i+1);
-      this.wishlist.splice(i,i+1);
     }
     else{
       this.products.splice(i,i);
-      this.wishlist.splice(i,i);
-      console.log(this.wishlist[i]+''+this.products[i])
     }
     if(this.wishlist.length<=0){this.empty=true;}
   }
