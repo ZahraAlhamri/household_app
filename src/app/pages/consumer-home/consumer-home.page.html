@@ -51,6 +51,10 @@
         <ion-col>
           {{item.name}}
         </ion-col>
+        <ion-col style="align-self: flex-end;">
+          <ion-icon *ngFor='let i of counter(item.rating)' name='star'></ion-icon>
+          <ion-icon *ngFor='let i of counter(5-item.rating)' name='star-outline'></ion-icon>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
