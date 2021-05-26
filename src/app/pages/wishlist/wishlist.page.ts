@@ -39,6 +39,7 @@ export class WishlistPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
+
   mdelete(i){
     console.log(localStorage.getItem('uid')+'  '+this.wishlist[i].id)
     this.firestore.deleteFromwishlist(localStorage.getItem('uid'),this.wishlist[i].id);
