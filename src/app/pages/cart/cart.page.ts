@@ -71,4 +71,23 @@ export class CartPage implements OnInit {
     details(i){
       this.router.navigateByUrl('item-details/'+this.cart[i].itemID);
     }
+    inc(){
+      this.newQty++;
+    }
+    dec(){
+      this.newQty--;
+    }
+    msave(i){
+      this.firestore.updateCart(localStorage.getItem('uid'),this.cart[i].id,this.cart[i].itemID,this.newQty);
+      this.toggleEdit(i);
+    }
+    toggleEdit(i){
+      if(this.edit[i]){
+        this.edit[i]=false;
+      }
+      else{
+        this.newQty=this.cart[i].quantity;
+        this.edit[i]=true;
+      }
+    }
 }
