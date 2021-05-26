@@ -62,6 +62,9 @@ export class AddItemPage implements OnInit {
       { type: 'required' , message: 'price is required'},
       { type: 'pattern', message: 'Enter a valid price.' }
     ],
+    'status': [
+      { type: 'required' , message: 'Availability is required'}
+     ],
   };
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -98,7 +101,9 @@ export class AddItemPage implements OnInit {
         description: new FormControl('', Validators.compose([
           Validators.pattern('^[a-zA-Z0-9][" "a-zA-Z0-9 \n]*[a-zA-Z]$')
         ])),
-  
+        status: new FormControl('', Validators.compose([
+          Validators.required
+        ])),  
       });
       }
     store(){
@@ -153,7 +158,7 @@ export class AddItemPage implements OnInit {
         price: value.price,
         quantity: value.quantity,
         uid: this.uid,
-        status: "Available",
+        status: value.status,
         addedDate: this.TodayDate,
         addedBy:this.uid,
         rating:0

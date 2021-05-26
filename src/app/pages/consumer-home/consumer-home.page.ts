@@ -80,6 +80,18 @@ export class ConsumerHomePage implements OnInit {
           });this.filteredList=this.items;this.priceRange.upper=this.maxPrice;
           });
   }
+  slideOpts= {
+    loop: true,
+    autoplay: {
+      delay: 1000
+      }
+  };
+  offers = ['1.png','2.png', '3.png', '4.png', '5.png','6.png'];
+  slidesDidLoad(slides:IonSlides) {
+    slides.startAutoplay();
+  }
+
+ 
   getItems(ev: any){
     this.items=this.filteredList;
     let v=ev.target.value;

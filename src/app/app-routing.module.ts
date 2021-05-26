@@ -54,9 +54,17 @@ const routes: Routes = [
   {
     path: 'cart',
     loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
-  },  {
+  },
+  {
     path: 'wishlist',
     loadChildren: () => import('./pages/wishlist/wishlist.module').then( m => m.WishlistPageModule)
+  },
+    path: 't-c',
+    loadChildren: () => import('./pages/t-c/t-c.module').then( m => m.TCPageModule)
+  },
+  {
+    path: 'future',
+    loadChildren: () => import('./pages/future/future.module').then( m => m.FuturePageModule)
   }
 
 

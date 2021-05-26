@@ -3,11 +3,18 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>consumer-home</ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-slides #mySlider (ionSlidesDidLoad)="slidesDidLoad(mySlider)" pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let offer of offers">
+        <img src="..\..\assets\images\{{offer}}">
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
   <ion-item>
     <ion-searchbar placeholder="search products names" showCancelButton="never" color='light' (ionInput)="getItems($event)"></ion-searchbar>
     <ion-icon (click)="filter()" [name]="filterIcon"></ion-icon>
