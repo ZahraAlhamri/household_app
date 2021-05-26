@@ -14,6 +14,7 @@ export class CartPage implements OnInit {
   cart=[];
   products=[];
   empty=false;
+  edit=[];
   constructor(private loadingController: LoadingController ,private firestore: FirestoreService) {
 
    }
@@ -28,6 +29,7 @@ export class CartPage implements OnInit {
           this.products.push(res.payload.data());
         })
           this.cart.push(element);
+          this.edit.push(false);
     });
     this.loadingController.dismiss();
     if(this.cart.length<=0){this.empty=true;}});
@@ -57,7 +59,7 @@ export class CartPage implements OnInit {
     delete(i){
       console.log(localStorage.getItem('uid')+'  '+this.cart[i].id)
       this.firestore.deleteFromCart(localStorage.getItem('uid'),this.cart[i].id);
-      /**if(i==0){
+      if(i==0){
         this.products.splice(i,i+1);
         this.cart.splice(i,i+1);
       }
@@ -66,7 +68,13 @@ export class CartPage implements OnInit {
         this.cart.splice(i,i);
         console.log(this.cart[i]+''+this.products[i])
       }
-      if(this.cart.length<=0){this.empty=true;}*/
+      if(this.cart.length<=0){this.empty=true;}
     }
-
+    toggleEdit(i){
+      if(this.edit[i]){
+        this.edit[i]=false;
+      }
+      else
+        this.edit[i]=true;
+    }
 }

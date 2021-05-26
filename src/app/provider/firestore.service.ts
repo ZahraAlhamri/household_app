@@ -93,7 +93,7 @@ deleteFromCart(uid,cartItemID){
 }
   getWishlist(uid){
     let wishlistCollection= this.db.collection<Request>('users').doc(uid).collection('wishlist')
-    this.wishlist= this.wishlistCollection.snapshotChanges().pipe(
+    this.wishlist= wishlistCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -104,7 +104,17 @@ deleteFromCart(uid,cartItemID){
     return this.wishlist;
   }
   addToWishlist(uid,pid){
-    return this.db.collection('users').doc(uid).collection('wishlist').add({itemID:pid});
+    let found=false
+    this.getWishlist(uid).
+          subscribe(res=>{res.forEach(item=>{if(!found){
+                if(item.itemID==pid){
+                      found=true;
+                }}
+          });if(!found)
+            this.db.collection('users').doc(uid).collection('wishlist').add({itemID:pid});})
+  }
+  deleteFromwishlist(usid,cartItemID){
+    return this.db.collection('users').doc(usid).collection('cart').doc(cartItemID).delete();
   }
 
 }

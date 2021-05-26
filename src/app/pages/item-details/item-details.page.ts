@@ -228,7 +228,14 @@ export class ItemDetailsPage implements OnInit {
       this.orderQty--;
     }
   }
+  addToWishlist(){
+    this.msg='The product is added to your wishlist';
+    this.presentToast();
+    this.firestore.addToWishlist(this.uid,this.id);
+  }
   addToCart(){
+    this.msg='The product is added to your cart';
+    this.presentToast();
     this.firestore.addToCart(this.uid,this.id,this.orderQty);
   }
   async presentAlertConfirm() {
@@ -252,4 +259,5 @@ export class ItemDetailsPage implements OnInit {
     });
     await alert.present();
   }
+
 }

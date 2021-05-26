@@ -20,17 +20,17 @@
     <ion-item routerLink= '/item-details/{{item.id}}'>
       <ion-grid>
         <ion-row>
-          <ion-col>
+          <ion-col size='3'>
             <ion-avatar style="margin: auto;">
               <img *ngIf="products[i]" [src]="products[i].photo">
               <img *ngIf="!products[i]" src="../../../assets/images/item.png">
             </ion-avatar>
-          </ion-col>
-          <ion-col class='alignCol' *ngIf="products[i]">
+          </ion-col >
+          <ion-col  size='5' class='alignCol' *ngIf="products[i]">
             {{products[i].name}}
           </ion-col>
           <ion-col class='alignCol'>
-            Qty: {{item.quantity}}
+              Qty: {{item.quantity}}
           </ion-col>
         </ion-row>
       </ion-grid>

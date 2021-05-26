@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'cart',
     loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+  },  {
+    path: 'wishlist',
+    loadChildren: () => import('./pages/wishlist/wishlist.module').then( m => m.WishlistPageModule)
   }
+
 
 ];
 
