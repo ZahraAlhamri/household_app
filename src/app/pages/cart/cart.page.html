@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='consumer-home'></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of cart; let i=index" routerLink= '/item-details/{{item.id}}'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-avatar style="margin: auto;">
+            <img *ngIf="products[i]" [src]="products[i].photo">
+            <img *ngIf="!products[i]" src="../../../assets/images/item.png">
+          </ion-avatar>
+        </ion-col>
+        <ion-col class='alignCol' *ngIf="products[i]">
+          {{products[i].name}}
+        </ion-col>
+        <ion-col class='alignCol'>
+          Qty: {{item.quantity}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-item>
+    <ion-label>Total Price:<ion-text class="ion-margin-start">{{calculatePrice()}}</ion-text></ion-label>
+  </ion-item>
+  <div style="text-align: -webkit-center;">
+    <ion-button color='lturquoise'>Order</ion-button>
+  </div>
+</ion-content>

@@ -91,14 +91,14 @@ export class ConsumerHomePage implements OnInit {
   saveFilter()
   {
     this.initilizeProducts();
-    if(this.priceRange.upper==this.maxPrice && this.priceRange.lower==this.maxPrice && this.categoryFilter==''){
+    if(this.priceRange.upper==this.maxPrice && this.priceRange.lower==this.maxPrice && this.categoryFilter==""){
       this.filterIcon="funnel-outline";
     }
     else{
     this.filterIcon="funnel";
     }
     let v=this.categoryFilter;
-    //this.items=this.items.filter((product)=>{return(product.category.toLowerCase().indexOf(v.toLowerCase())>-1);});
+    this.items=this.items.filter((product)=>{return(product.type.toLowerCase().indexOf(v.toLowerCase())>-1);});
     this.items=this.items.filter((product)=>{return((product.price>=(this.priceRange.lower)) && (product.price<=(this.priceRange.upper)));});
     this.showFilter=false;
     this.filteredList=this.items;
@@ -116,5 +116,6 @@ export class ConsumerHomePage implements OnInit {
   {
     this.items=this.originalitems ;
   }
+
 
 }

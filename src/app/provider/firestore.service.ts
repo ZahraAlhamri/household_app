@@ -12,7 +12,9 @@ import { map, take } from 'rxjs/operators';
 })
 export class FirestoreService {
   items: Observable<any[]>;
+  cart: Observable<any[]>;
   private itemsCollection: AngularFirestoreCollection<Request>;
+  private cartCollection: AngularFirestoreCollection<Request>;
   item: Observable<any[]>;
   private itemCollection: AngularFirestoreCollection<Request>;
   constructor(public db: AngularFirestore) {   }
@@ -61,4 +63,19 @@ export class FirestoreService {
       }
     );
   }
+  addToCart(uid,pid,qty){
+    return this.db.collection('users').doc(uid).collection('cart').add({itemID:pid,quantity:qty});
+  }
+  getCart(uid){
+    this.cartCollection= this.db.collection<Request>('users').doc(uid).collection('cart')
+    this.cart= this.cartCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+  }));return this.cart;
+
+}
 }
