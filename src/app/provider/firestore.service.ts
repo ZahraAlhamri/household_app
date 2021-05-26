@@ -132,5 +132,9 @@ deleteFromCart(uid,cartItemID){
   deleteFromwishlist(usid,cartItemID){
     return this.db.collection('users').doc(usid).collection('cart').doc(cartItemID).delete();
   }
+  updateCart(uid,cartItemID,pid,qty){
+    return this.db.collection('users').doc(uid).collection('cart').doc(cartItemID).update({quantity: qty});
+
+  }
 
 }

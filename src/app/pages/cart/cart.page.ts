@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase/app';
@@ -15,7 +16,8 @@ export class CartPage implements OnInit {
   products=[];
   empty=false;
   edit=[];
-  constructor(private loadingController: LoadingController ,private firestore: FirestoreService) {
+  newQty=0;
+  constructor(private router: Router, private loadingController: LoadingController ,private firestore: FirestoreService) {
 
    }
 
@@ -70,11 +72,7 @@ export class CartPage implements OnInit {
       }
       if(this.cart.length<=0){this.empty=true;}
     }
-    toggleEdit(i){
-      if(this.edit[i]){
-        this.edit[i]=false;
-      }
-      else
-        this.edit[i]=true;
+    details(i){
+      this.router.navigateByUrl('item-details/'+this.cart[i].itemID);
     }
 }
