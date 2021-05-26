@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 't-c',
+    loadChildren: () => import('./pages/t-c/t-c.module').then( m => m.TCPageModule)
   }
 ];
 
