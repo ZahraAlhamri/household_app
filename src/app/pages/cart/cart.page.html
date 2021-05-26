@@ -29,7 +29,7 @@
           <ion-col  size='5' class='alignCol' *ngIf="products[i]">
             {{products[i].name}}
           </ion-col>
-          <ion-col class='alignCol'>
+          <ion-col class='alignCol' *ngIf="products[i]">
               Qty: {{item.quantity}}x{{products[i].price}}BD
           </ion-col>
         </ion-row>
