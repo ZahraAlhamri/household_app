@@ -13,6 +13,8 @@ import { map, take } from 'rxjs/operators';
 export class FirestoreService {
   items: Observable<any[]>;
   cart: Observable<any[]>;
+  wishlist: Observable<any[]>;
+  private wishlistCollection: AngularFirestoreCollection<Request>;
   private itemsCollection: AngularFirestoreCollection<Request>;
   private cartCollection: AngularFirestoreCollection<Request>;
   item: Observable<any[]>;
@@ -64,7 +66,16 @@ export class FirestoreService {
     );
   }
   addToCart(uid,pid,qty){
-    return this.db.collection('users').doc(uid).collection('cart').add({itemID:pid,quantity:qty});
+    let found=false
+    this.getCart(uid).
+          subscribe(res=>{res.forEach(item=>{if(!found){
+                if(item.itemID==pid){
+                  this.db.collection('users').doc(uid).collection('cart').doc(item.id).
+                      update({quantity: item.quantity+qty});
+                      found=true;
+                }}
+          });if(!found)
+            this.db.collection('users').doc(uid).collection('cart').add({itemID:pid,quantity:qty});})
   }
   getCart(uid){
     this.cartCollection= this.db.collection<Request>('users').doc(uid).collection('cart')
@@ -76,6 +87,24 @@ export class FirestoreService {
           return { id, ...data };
         });
   }));return this.cart;
-
 }
+deleteFromCart(uid,cartItemID){
+  return this.db.collection('users').doc(uid).collection('cart').doc(cartItemID).delete();
+}
+  getWishlist(uid){
+    let wishlistCollection= this.db.collection<Request>('users').doc(uid).collection('wishlist')
+    this.wishlist= this.wishlistCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+    }));
+    return this.wishlist;
+  }
+  addToWishlist(uid,pid){
+    return this.db.collection('users').doc(uid).collection('wishlist').add({itemID:pid});
+  }
+
 }
