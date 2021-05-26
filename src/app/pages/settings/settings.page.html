@@ -32,3 +32,10 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+<ion-footer>
+  <ion-toolbar routerLink="/forget-password" routerDirection= "forward" style="text-align: center; outline: none;">
+    <ion-title style="color: white;" *ngIf="language=='English'">Reset Password</ion-title>
+    <ion-title style="color: white;" *ngIf="language=='عربي'">اعادة تعيين كلمة المرور</ion-title>
+
+  </ion-toolbar>
+</ion-footer>

@@ -12,10 +12,12 @@ import { map, take } from 'rxjs/operators';
 })
 export class FirestoreService {
   items: Observable<any[]>;
+  Fitems: Observable<any[]>;
   cart: Observable<any[]>;
   wishlist: Observable<any[]>;
   private wishlistCollection: AngularFirestoreCollection<Request>;
   private itemsCollection: AngularFirestoreCollection<Request>;
+  private itemsFCollection: AngularFirestoreCollection<Request>;
   private cartCollection: AngularFirestoreCollection<Request>;
   item: Observable<any[]>;
   private itemCollection: AngularFirestoreCollection<Request>;
@@ -41,6 +43,20 @@ export class FirestoreService {
       })
     );
     return this.items;
+  }
+  getFutureItems(){
+    this.itemsFCollection= this.db.collection<any>('items', ref=> ref.where('status', '==', 'Future'))
+    this.itemsCollection= this.db.collection<Request>('items')
+    this.Fitems= this.itemsFCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.Fitems;
   }
   getItem(id){
     console.log(id);
