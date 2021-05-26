@@ -19,10 +19,10 @@ export class WishlistPage implements OnInit {
       this.wishlist=[];
       val.forEach(async element => {
         console.log(element.id);
-        /**this.firestore.getItem(element.itemID).snapshotChanges().subscribe(res=>{
+        this.firestore.getItem(element.itemID).snapshotChanges().subscribe(res=>{
           this.products.push(res.payload.data());
         })
-          this.wishlist.push(element);*/
+          this.wishlist.push(element);
     });
    // this.loadingController.dismiss();
     if(this.wishlist.length<=0){this.empty=true;}
