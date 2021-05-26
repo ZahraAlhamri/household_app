@@ -15,6 +15,12 @@
               <ion-label>Home</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item  lines="none" detail="false" routerLink="/cart" (click)="logout()" >
+              <ion-icon slot="start" name="cart-outline" color="lturquoise"></ion-icon>
+              <ion-label>Cart</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false"  *ngIf="uType != 'Receiver'" >
             <ion-item  lines="none" detail="false" routerLink="/edit-profile" routerDirection= "forward" >
               <ion-icon slot="start" name="person-outline" color="lturquoise"></ion-icon>

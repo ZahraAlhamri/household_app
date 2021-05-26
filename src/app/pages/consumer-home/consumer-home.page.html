@@ -15,6 +15,30 @@
       </ion-slide>
     </ion-slides>
   </ion-card>
+  <ion-item>
+    <ion-searchbar placeholder="search products names" showCancelButton="never" color='light' (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-icon (click)="filter()" [name]="filterIcon"></ion-icon>
+  </ion-item>
+  <div *ngIf="showFilter">
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select placeholder="Select One" interface="action-sheet" [(ngModel)]="categoryFilter">
+        <ion-select-option value="">All</ion-select-option>
+        <ion-select-option value="c1">category1</ion-select-option>
+        <ion-select-option value="c2">category2</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="priceRange.lower" class="ion-no-margin rangeInput"></ion-input>
+      <ion-range [(ngModel)]="priceRange" id="price-range" dual-knobs pin color="dark" min="0" [max]='maxPrice'>
+      </ion-range>
+      <ion-input [(ngModel)]="priceRange.upper" class="ion-no-margin rangeInput"></ion-input>
+    </ion-item>
+    <div class="centerItems">
+      <ion-button color="success" fill="outline" (click)="saveFilter()">Save</ion-button>
+      <ion-button color="primary" fill="outline" (click)="resetFilter()">Reset</ion-button>
+    </div>
+  </div>
   <ion-card *ngFor="let item of items" routerLink= '/item-details/{{item.id}}'>
     <ion-grid>
       <ion-row>
@@ -22,7 +46,7 @@
           <ion-avatar style="margin: auto;">
             <img *ngIf="item.photo" [src]="item.photo">
             <img *ngIf="!item.photo" src="../../../assets/images/item.png">
-          </ion-avatar> 
+          </ion-avatar>
         </ion-col>
         <ion-col>
           {{item.name}}

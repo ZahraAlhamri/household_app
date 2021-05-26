@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController, ToastController, AlertController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/provider/firestore.service';
 import { AuthenticationService } from 'src/app/provider/authentication.service';
 import { LoadingController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { ElementFinder } from 'protractor';
@@ -33,13 +32,10 @@ export class ItemDetailsPage implements OnInit {
   uid;
   status;
   photo;
-   
+  orderQty=1;
   successMessage: string = '';
   errorMessage: string = '';
   validations_form: FormGroup;
-  
- 
-  
   public uploadfile;
   public filename;
   TodayDate= new Date();
@@ -68,17 +64,18 @@ export class ItemDetailsPage implements OnInit {
   };
 
   constructor(
+    private alertController:AlertController,
     private activatedRoute: ActivatedRoute,
-    private navCtrl: NavController, 
-    private authService: AuthenticationService, 
-    private formBuilder: FormBuilder, 
-    private firestore: FirestoreService, 
+    private navCtrl: NavController,
+    private authService: AuthenticationService,
+    private formBuilder: FormBuilder,
+    private firestore: FirestoreService,
     private loader: LoadingController,
     private alert: AlertController,
     private menuCtrl: MenuController,
     public ModalCtrl:ModalController,
-    public toastController: ToastController, 
-    public  route: ActivatedRoute) { }
+    public toastController: ToastController,
+    public  route: ActivatedRoute,) { }
 
   ngOnInit() {
     this.uid = localStorage.getItem('uid');
@@ -86,14 +83,14 @@ export class ItemDetailsPage implements OnInit {
     this.id=this.route.snapshot.paramMap.get('id');
     this.firestore.getItem(this.id).valueChanges().subscribe(
       async item=>{
-        this.item = item;   
-        this.name=this.item.name; 
-        this.type=this.item.type;      
-        this.price=this.item.price;      
-        this.quantity=this.item.quantity;      
-        this.description=this.item.description;   
-        this.photo=this.item.photo; 
-        this.status=this.item.status;  
+        this.item = item;
+        this.name=this.item.name;
+        this.type=this.item.type;
+        this.price=this.item.price;
+        this.quantity=this.item.quantity;
+        this.description=this.item.description;
+        this.photo=this.item.photo;
+        this.status=this.item.status;
       });
       this.validations_form = this.formBuilder.group({
         name: new FormControl('', Validators.compose([
@@ -115,10 +112,10 @@ export class ItemDetailsPage implements OnInit {
         description: new FormControl('', Validators.compose([
           Validators.pattern('^[a-zA-Z0-9][" "a-zA-Z0-9 \n]*[a-zA-Z]$')
         ])),
-  
+
       });
-          
-        
+
+
   }
   store(){
       if(this.uploadfile){
@@ -139,7 +136,7 @@ export class ItemDetailsPage implements OnInit {
               })
             }
           )
-        } 
+        }
       )
     }
     this.hideLoader();
@@ -156,7 +153,7 @@ export class ItemDetailsPage implements OnInit {
       }
       reader.readAsDataURL(evt.target.files[0]);
     }
-      let fileList: FileList = evt.target.files;  
+      let fileList: FileList = evt.target.files;
       let file: File = fileList[0];
       console.log(file);
       this.uploadfile = evt.target.files[0];
@@ -172,7 +169,7 @@ export class ItemDetailsPage implements OnInit {
        this.msg = err.message;
       this.hideLoader();
       this.presentToast();
-    
+
     });
   }
   Delete(){
@@ -184,7 +181,7 @@ export class ItemDetailsPage implements OnInit {
        this.msg = err.message;
       this.hideLoader();
       this.presentToast();
-    
+
     });
   }
   Recovery(){
@@ -196,7 +193,7 @@ export class ItemDetailsPage implements OnInit {
        this.msg = err.message;
       this.hideLoader();
       this.presentToast();
-    
+
     });
   }
   async presentToast() {
@@ -221,6 +218,38 @@ export class ItemDetailsPage implements OnInit {
   hideLoader() {
     this.loader.dismiss();
   }
+  incOrderQty(){
+    if(this.orderQty<this.quantity){
+      this.orderQty++;
+    }
+  }
+  decOrderQty(){
+    if(this.orderQty>1){
+      this.orderQty--;
+    }
+  }
+  addToCart(){
+    this.firestore.addToCart(this.uid,this.id,this.orderQty);
+  }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message:'Add '+this.orderQty+' '+this.name+' To your Cart',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            this.addToCart()          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }
-
-
