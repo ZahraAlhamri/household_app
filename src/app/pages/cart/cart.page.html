@@ -41,9 +41,9 @@
         new quantity:&nbsp;
         <ion-icon (click)="dec()" name='remove-circle-outline'></ion-icon>
         <div style="width: 5ch;">
-          <ion-input [(ngModel)]="newQty" style="text-align-last: center;"></ion-input>
+          <ion-input type='number' [(ngModel)]="newQty" style="text-align-last: center;"></ion-input>
         </div>
-        <ion-icon (click)="inc()" name='add-circle-outline'></ion-icon>
+        <ion-icon (click)="inc(i)" name='add-circle-outline'></ion-icon>
         </ion-item>
         <ion-button size='small' (click)='msave(i)'>Save</ion-button>
         <ion-button size='small' (click)='toggleEdit(i)'>cancel</ion-button>

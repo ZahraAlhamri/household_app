@@ -128,7 +128,7 @@
       <ion-icon (click)='incOrderQty()'  name="add-circle-outline"></ion-icon>
     </ion-item>
   </div>
-    <ion-button (click)='presentAlertConfirm()' *ngIf="uType=='Consumer'" expand="block">add to cart</ion-button>
+    <ion-button (click)='checkQuantity()' *ngIf="uType=='Consumer'" expand="block">add to cart</ion-button>
     <ion-button (click)='addToWishlist()' *ngIf="uType=='Consumer'" expand="block">add to wishlist</ion-button>
     </ion-card>
 </ion-content>

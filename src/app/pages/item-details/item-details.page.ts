@@ -219,6 +219,11 @@ export class ItemDetailsPage implements OnInit {
     this.loader.dismiss();
   }
   incOrderQty(){
+    if(this.orderQty==this.quantity){
+      this.msg='this quantity is not available';
+      this.presentToast();
+
+    }
     if(this.orderQty<this.quantity){
       this.orderQty++;
     }
@@ -258,6 +263,15 @@ export class ItemDetailsPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+  checkQuantity(){
+    if(this.orderQty>this.price){
+      this.msg='this quantity is not available'
+      this.presentToast();
+      this.orderQty=0;
+    }
+    else
+      this.presentAlertConfirm();
   }
 
 }
