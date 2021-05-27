@@ -8,6 +8,7 @@ import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
+import { Router, NavigationExtras } from '@angular/router';
 import { ElementFinder } from 'protractor';
 //import { auth } from 'firebase';
 import firebase from 'firebase/app';
@@ -78,7 +79,9 @@ export class ItemDetailsPage implements OnInit {
     private menuCtrl: MenuController,
     public ModalCtrl:ModalController,
     public toastController: ToastController, 
-    public  route: ActivatedRoute) { }
+    public  route: ActivatedRoute,
+    private router: Router
+     ) { }
 
   ngOnInit() {
     this.uid = localStorage.getItem('uid');
@@ -175,8 +178,20 @@ export class ItemDetailsPage implements OnInit {
     
     });
   }
+  Hide(){
+    this.firestore.hideItem(this.id).then((res) => {
+      this.msg=" item state chamged to unavailable";
+      this.presentToast();
+      this.navCtrl.navigateForward('merchant-home');
+    }, err => {
+       this.msg = err.message;
+      this.hideLoader();
+      this.presentToast();
+    
+    });
+  }
   Delete(){
-    this.firestore.deletItem(this.id).then((res) => {
+    this.firestore.deleteItem(this.id).then((res) => {
       this.msg="the item has been deleted successfully";
       this.presentToast();
       this.navCtrl.navigateForward('merchant-home');
@@ -221,6 +236,19 @@ export class ItemDetailsPage implements OnInit {
   hideLoader() {
     this.loader.dismiss();
   }
-}
+
+  
+    gotoadd(){
+      this.navCtrl.navigateForward('/addreviews/'+this.id);
+    }
+    gotoview(){
+      this.navCtrl.navigateForward('/viewreviews/'+this.id);
+    }
+    gotodiscount(){
+      this.navCtrl.navigateForward('/adddiscount/'+this.id);
+
+    }
+  }
+
 
 

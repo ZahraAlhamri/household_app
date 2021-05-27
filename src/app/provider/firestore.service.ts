@@ -15,6 +15,8 @@ export class FirestoreService {
   private itemsCollection: AngularFirestoreCollection<Request>;
   item: Observable<any[]>;
   private itemCollection: AngularFirestoreCollection<Request>;
+  reviews: Observable<any[]>;
+  private reviewsCollection: AngularFirestoreCollection<Request>;
   constructor(public db: AngularFirestore) {   }
   registerUserDetails(uid,user){
     console.log('here in user register details ',uid);
@@ -24,6 +26,10 @@ export class FirestoreService {
   additem(item){
     console.log('item here', item);
     return this.db.collection('items').add(item);
+  }
+  addreview(id,review){
+    console.log('item here', review);
+    return this.db.collection('items').doc(id).collection('reviews').add(review);
   }
   getItems(){
     this.itemsCollection= this.db.collection<Request>('items')
@@ -42,8 +48,11 @@ export class FirestoreService {
     console.log(id);
     return this.db.collection<any>('items').doc(id);
   }
-  deletItem(id){
+  hideItem(id){
     return this.db.collection('items').doc(id).update({"status": "Unavailable"});
+  }
+  deleteItem(id){
+    return this.db.collection('items').doc(id).delete();
   }
   recoveryItem(id){
     return this.db.collection('items').doc(id).update({"status": "Available"});
@@ -61,4 +70,25 @@ export class FirestoreService {
       }
     );
   }
+
+  updaterating(id,rating,counter){
+    return this.db.collection('items').doc(id).update(
+      {
+       "rating": rating,
+       "counter": counter,
+
+      }
+    );
+  }
+  getReviews(id){
+    this.reviewsCollection= this.db.collection<Request>('items').doc(id).collection('reviews')
+    this.reviews= this.reviewsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+  }));return this.reviews;
+}
 }

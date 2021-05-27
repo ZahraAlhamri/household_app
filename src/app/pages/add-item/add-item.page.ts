@@ -35,7 +35,7 @@ export class AddItemPage implements OnInit {
   public uploadfile;
   public filename;
   msg;
-  photo;;
+  photo;
   uType;
 
   TodayDate= new Date();
@@ -62,6 +62,7 @@ export class AddItemPage implements OnInit {
       { type: 'required' , message: 'price is required'},
       { type: 'pattern', message: 'Enter a valid price.' }
     ],
+  
   };
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -98,7 +99,8 @@ export class AddItemPage implements OnInit {
         description: new FormControl('', Validators.compose([
           Validators.pattern('^[a-zA-Z0-9][" "a-zA-Z0-9 \n]*[a-zA-Z]$')
         ])),
-  
+      
+          
       });
       }
     store(){
@@ -156,7 +158,10 @@ export class AddItemPage implements OnInit {
         status: "Available",
         addedDate: this.TodayDate,
         addedBy:this.uid,
-        rating:0
+        rating:0,
+        counter:0,
+        percentage:0,
+        duration: "00:00:00"
       }
   
       this.firestore.additem(item)

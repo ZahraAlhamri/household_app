@@ -41,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'updat-item',
-    loadChildren: () => import('./updat-item/updat-item.module').then( m => m.UpdatItemPageModule)
+    loadChildren: () => import('./pages/updat-item/updat-item.module').then( m => m.UpdatItemPageModule)
   },
   {
     path: 'item-details/:id',
@@ -50,7 +50,22 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'addreviews/:id',
+    loadChildren: () => import('./pages/addreviews/addreviews.module').then( m => m.AddreviewsPageModule)
+  },
+  {
+    path: 'viewreviews/:id',
+    loadChildren: () => import('./pages/viewreviews/viewreviews.module').then( m => m.ViewreviewsPageModule)
+  },
+  {
+    path: 'adddiscount/:id',
+    loadChildren: () => import('./pages/adddiscount/adddiscount.module').then( m => m.AdddiscountPageModule)
   }
+
+
+
 ];
 
 @NgModule({

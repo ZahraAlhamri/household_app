@@ -12,10 +12,11 @@
     <ion-card >
       <ion-card-content> 
       <div>
-        <ion-avatar style="margin: auto;">
+        
+        <ion-card style="margin: auto;">
           <img *ngIf="photo" [src]="photo">
           <img *ngIf="!photo" src="../../../assets/images/item.png">
-        </ion-avatar> 
+        </ion-card> 
         <ion-input type="file" (change)="HandleFileSelect($event)"></ion-input>
       </div>
     </ion-card-content>
