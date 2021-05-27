@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WishlistPageRoutingModule } from './wishlist-routing.module';
+import { AddreviewsPageRoutingModule } from './addreviews-routing.module';
 
-import { WishlistPage } from './wishlist.page';
+import { AddreviewsPage } from './addreviews.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WishlistPageRoutingModule
+    AddreviewsPageRoutingModule
   ],
-  declarations: [WishlistPage]
+  declarations: [AddreviewsPage]
 })
-export class WishlistPageModule {}
+export class AddreviewsPageModule {}

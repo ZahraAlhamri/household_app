@@ -39,8 +39,8 @@
       <ion-input [(ngModel)]="priceRange.upper" class="ion-no-margin rangeInput"></ion-input>
     </ion-item>
     <div class="centerItems">
-      <ion-button size='small' color='dturquoise' (click)="saveFilter()">Save</ion-button>
-      <ion-button size='small' color='lturquoise' (click)="resetFilter()">Reset</ion-button>
+      <ion-button size='small' (click)="saveFilter()">Save</ion-button>
+      <ion-button size='small' color='dturquoise' (click)="resetFilter()">Reset</ion-button>
     </div>
   </div>
   <div [ngSwitch]="segment">
@@ -56,9 +56,13 @@
                 </ion-avatar>
               </ion-col>
               <ion-col>
-                {{item.name}}
+                 {{item.name}} <br>
+                Price: {{item.price}} BD <br>
+                Rating: {{item.rating}} ({{item.counter}}) 
+
               </ion-col>
             </ion-row>
+            
           </ion-grid>
         </ion-card-content>
       </ion-card>

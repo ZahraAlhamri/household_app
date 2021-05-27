@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FuturePageRoutingModule } from './future-routing.module';
+import { ViewreviewsPageRoutingModule } from './viewreviews-routing.module';
 
-import { FuturePage } from './future.page';
+import { ViewreviewsPage } from './viewreviews.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FuturePageRoutingModule
+    ViewreviewsPageRoutingModule
   ],
-  declarations: [FuturePage]
+  declarations: [ViewreviewsPage]
 })
-export class FuturePageModule {}
+export class ViewreviewsPageModule {}

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TCPageRoutingModule } from './t-c-routing.module';
+import { AdddiscountPageRoutingModule } from './adddiscount-routing.module';
 
-import { TCPage } from './t-c.page';
+import { AdddiscountPage } from './adddiscount.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TCPageRoutingModule
+    AdddiscountPageRoutingModule
   ],
-  declarations: [TCPage]
+  declarations: [AdddiscountPage]
 })
-export class TCPageModule {}
+export class AdddiscountPageModule {}

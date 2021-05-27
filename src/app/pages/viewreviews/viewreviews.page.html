@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="/items-details"> </ion-back-button>
+
+    <ion-title>View Reviews</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of reviews">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+        Review:  {{item.review}}
+        </ion-col>
+        <ion-col>
+         Rating: {{item.rating}}
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

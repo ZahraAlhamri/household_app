@@ -4,7 +4,7 @@
       <ion-back-button *ngIf="uType=='Consumer'" defaultHref= '/consumer-home'></ion-back-button>
       <ion-back-button *ngIf="uType=='Merchant'" defaultHref= '/merchant-home'></ion-back-button>
     </ion-buttons>
-    <ion-title>{{name}}</ion-title>
+    <ion-title>item-details</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,11 +12,15 @@
 <ion-content *ngIf="uType=='Merchant'">
   <div>
     <ion-card >
-      <ion-card-content>
+      <ion-card-content> 
       <div>
+        <ion-button (click)="gotoview()" expand="block">view reviews</ion-button>
+        <ion-button (click)="gotodiscount()" expand="block">Add discount</ion-button>
+
+<br>
         <ion-avatar style="margin: auto;">
           <img *ngIf="photo" [src]="photo">
-        </ion-avatar>
+        </ion-avatar> 
         <ion-input type="file" (change)="HandleFileSelect($event)"></ion-input>
       </div>
     </ion-card-content>
@@ -24,7 +28,7 @@
   </div>
   <ion-card>
     <form [formGroup]="validations_form">
-
+  
       <ion-card>
         <ion-card-content>
             <ion-item >
@@ -70,7 +74,7 @@
                   {{ validation.message }}
                 </div>
               </ng-container>
-            </div>
+            </div> 
             <ion-item>
               <ion-label position="floating">Description</ion-label>
               <ion-textarea [(ngModel)]="description" formControlName="description"></ion-textarea>
@@ -82,7 +86,7 @@
                 </div>
               </ng-container>
             </div>
-
+           
             <div style="text-align: center;">
               <ion-button type="submit" expand="block" [disabled]="!validations_form.valid" (click)="upadteItem()">Update</ion-button>
             </div>
@@ -90,17 +94,23 @@
             <ion-button *ngIf="uType=='Merchant' && status== 'Unavailable'" expand="block" (click)="Recovery()">Recover</ion-button>
           </ion-card-content>
         </ion-card>
-      </form>
+      </form>  
   </ion-card>
 </ion-content>
 <!---------------------------------------------------------Consumer--------------------------------------------------------->
 <ion-content *ngIf="uType=='Consumer'">
   <ion-card>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <ion-button (click)="gotoadd()">add review</ion-button>
+    <ion-button (click)="gotoview()">view reviews</ion-button>
     <br/>
+    <br/>
+
     <ion-avatar style="margin: auto; height: 100px; width: 100px;">
       <img *ngIf="photo" [src]="photo">
       <img *ngIf="!photo" src="../../../assets/images/item.png">
-    </ion-avatar>
+    </ion-avatar> 
     <ion-card-content>
       <ion-item>
         <ion-label>Name: {{name}}</ion-label>
@@ -118,17 +128,7 @@
         <ion-label>Description: {{description}}</ion-label>
       </ion-item>
     </ion-card-content>
-    <div>
-    <ion-item>
-      <ion-label>Order quantity</ion-label>
-      <ion-icon (click)='decOrderQty()'  name="remove-circle-outline"></ion-icon>
-      <div style="width: 3ch;">
-        <ion-input [(ngModel)]='orderQty' style="text-align-last: center;" class=" ion-no-padding"  type="numeric"></ion-input>
-      </div>
-      <ion-icon (click)='incOrderQty()'  name="add-circle-outline"></ion-icon>
-    </ion-item>
-  </div>
-    <ion-button (click)='checkQuantity()' *ngIf="uType=='Consumer'" expand="block">add to cart</ion-button>
-    <ion-button (click)='addToWishlist()' *ngIf="uType=='Consumer'" expand="block">add to wishlist</ion-button>
+    <ion-button *ngIf="uType=='Consumer'" expand="block">add to cart</ion-button>
+    <ion-button *ngIf="uType=='Consumer'" expand="block">add to wishlist</ion-button>
     </ion-card>
 </ion-content>

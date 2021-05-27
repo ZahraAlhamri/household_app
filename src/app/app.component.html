@@ -10,10 +10,14 @@
               <ion-icon slot="start" name="home-outline" color="lturquoise"></ion-icon>
               <ion-label>Home</ion-label>
             </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle>
             <ion-item  lines="none" detail="false" routerLink="/merchant-home" routerDirection= "forward" *ngIf="uType=='Merchant'" >
               <ion-icon slot="start" name="person-outline" color="lturquoise"></ion-icon>
               <ion-label>Home</ion-label>
             </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
             <ion-item  lines="none" detail="false" routerLink="/future" routerDirection= "forward">
               <ion-icon slot="start" name="medical-outline" color="lturquoise"></ion-icon>
               <ion-label>Future Products</ion-label>
@@ -56,7 +60,7 @@
               <ion-icon slot="start" name="document-text-outline" color="lturquoise"></ion-icon>
               <ion-label>Terms and Condiitons</ion-label>
             </ion-item>
-          </ion-menu-toggle>
+            </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false" >
             <ion-item  lines="none" detail="false" routerLink="/settings" routerDirection= "forward">
               <ion-icon slot="start" name="settings-outline" color="lturquoise"></ion-icon>
