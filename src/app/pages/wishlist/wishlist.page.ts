@@ -19,10 +19,10 @@ export class WishlistPage implements OnInit {
       this.wishlist=[];
       val.forEach(async element => {
         console.log(element.id);
-        /**this.firestore.getItem(element.itemID).snapshotChanges().subscribe(res=>{
+        this.firestore.getItem(element.itemID).snapshotChanges().subscribe(res=>{
           this.products.push(res.payload.data());
         })
-          this.wishlist.push(element);*/
+          this.wishlist.push(element);
     });
    // this.loadingController.dismiss();
     if(this.wishlist.length<=0){this.empty=true;}
@@ -39,17 +39,15 @@ export class WishlistPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
-  delete(i){
+
+  mdelete(i){
     console.log(localStorage.getItem('uid')+'  '+this.wishlist[i].id)
     this.firestore.deleteFromwishlist(localStorage.getItem('uid'),this.wishlist[i].id);
     if(i==0){
       this.products.splice(i,i+1);
-      this.wishlist.splice(i,i+1);
     }
     else{
       this.products.splice(i,i);
-      this.wishlist.splice(i,i);
-      console.log(this.wishlist[i]+''+this.products[i])
     }
     if(this.wishlist.length<=0){this.empty=true;}
   }

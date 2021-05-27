@@ -1,4 +1,5 @@
-import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -15,12 +16,12 @@ export class CartPage implements OnInit {
   products=[];
   empty=false;
   edit=[];
-  constructor(private loadingController: LoadingController ,private firestore: FirestoreService) {
+  newQty=0;
+  constructor(private toastController: ToastController, private router: Router, private loadingController: LoadingController ,private firestore: FirestoreService) {
 
    }
 
   ngOnInit() {
-    this.presentLoading();
     this.firestore.getCart(localStorage.getItem('uid')).subscribe(val=>{
       this.cart=[];
       val.forEach(async element => {
@@ -31,7 +32,6 @@ export class CartPage implements OnInit {
           this.cart.push(element);
           this.edit.push(false);
     });
-    this.loadingController.dismiss();
     if(this.cart.length<=0){this.empty=true;}});
   }
 
@@ -40,7 +40,7 @@ export class CartPage implements OnInit {
       let totalPrice=0;
       for(let i=0;i<this.cart.length;i++){
         if(this.products[i]){
-          totalPrice+=Number(this.products[i].price)*this.cart[i].quantity
+          totalPrice+=Math.round(Number((this.products[i].price)*this.cart[i].quantity)*10)/10;
           }
       }
       return totalPrice;
@@ -57,24 +57,54 @@ export class CartPage implements OnInit {
       console.log('Loading dismissed!');
     }
     delete(i){
-      console.log(localStorage.getItem('uid')+'  '+this.cart[i].id)
       this.firestore.deleteFromCart(localStorage.getItem('uid'),this.cart[i].id);
       if(i==0){
         this.products.splice(i,i+1);
-        this.cart.splice(i,i+1);
       }
       else{
         this.products.splice(i,i);
-        this.cart.splice(i,i);
-        console.log(this.cart[i]+''+this.products[i])
       }
       if(this.cart.length<=0){this.empty=true;}
+    }
+    details(i){
+      this.router.navigateByUrl('item-details/'+this.cart[i].itemID);
+    }
+    inc(i){
+      if(this.newQty==this.products[i].quantity){
+        this.presentToast();
+      }
+      console.log(i);
+      if(this.products[i]){
+        if(this.newQty<this.products[i].quantity)
+          this.newQty++;}
+    }
+    dec(){
+      if(this.newQty>1)
+        this.newQty--;
+    }
+    msave(i){
+      if(this.newQty>this.products[i].quantity){
+        this.presentToast();
+        this.newQty=this.cart[i].quantity}
+      else{
+      this.firestore.updateCart(localStorage.getItem('uid'),this.cart[i].id,this.cart[i].itemID,this.newQty);
+      this.toggleEdit(i);
+      }
     }
     toggleEdit(i){
       if(this.edit[i]){
         this.edit[i]=false;
       }
-      else
+      else{
+        this.newQty=this.cart[i].quantity;
         this.edit[i]=true;
+      }
+    }
+    async presentToast() {
+      const toast = await this.toastController.create({
+        message: 'This quantity is not available',
+        duration: 2000
+      });
+      toast.present();
     }
 }

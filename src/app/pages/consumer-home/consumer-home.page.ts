@@ -128,6 +128,9 @@ export class ConsumerHomePage implements OnInit {
   {
     this.items=this.originalitems ;
   }
+  counter(i: number) {
 
+    return new Array(Math.floor(i));
+}
 
 }

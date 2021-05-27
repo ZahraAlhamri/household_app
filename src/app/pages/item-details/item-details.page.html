@@ -4,7 +4,7 @@
       <ion-back-button *ngIf="uType=='Consumer'" defaultHref= '/consumer-home'></ion-back-button>
       <ion-back-button *ngIf="uType=='Merchant'" defaultHref= '/merchant-home'></ion-back-button>
     </ion-buttons>
-    <ion-title>item-details</ion-title>
+    <ion-title>{{name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -128,7 +128,7 @@
       <ion-icon (click)='incOrderQty()'  name="add-circle-outline"></ion-icon>
     </ion-item>
   </div>
-    <ion-button (click)='presentAlertConfirm()' *ngIf="uType=='Consumer'" expand="block">add to cart</ion-button>
-    <ion-button *ngIf="uType=='Consumer'" expand="block">add to wishlist</ion-button>
+    <ion-button (click)='checkQuantity()' *ngIf="uType=='Consumer'" expand="block">add to cart</ion-button>
+    <ion-button (click)='addToWishlist()' *ngIf="uType=='Consumer'" expand="block">add to wishlist</ion-button>
     </ion-card>
 </ion-content>
