@@ -113,6 +113,7 @@ export class MerchantHomePage implements OnInit {
   searchItems(ev){
     this.items=this.filteredList;
     let v=ev.target.value;
+    console.log(this.items);
     this.items=this.items.filter((product)=>{return(product.name.toLowerCase().indexOf(v.toLowerCase())>-1);});
   }
   changeSeg(){
