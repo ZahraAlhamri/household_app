@@ -130,7 +130,7 @@ export class ConsumerHomePage implements OnInit {
   }
   counter(i: number) {
 
-    return new Array(Math.floor(i));
+    return new Array(Math.floor(Number(i)));
 }
 
 

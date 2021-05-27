@@ -26,8 +26,10 @@
       <ion-label>Category</ion-label>
       <ion-select placeholder="Select One" interface="action-sheet" [(ngModel)]="categoryFilter">
         <ion-select-option value="">All</ion-select-option>
-        <ion-select-option value="food">food</ion-select-option>
+        <ion-select-option value="carpets">food</ion-select-option>
         <ion-select-option value="kitchen">kitchen</ion-select-option>
+        <ion-select-option value="bedroom">kitchen</ion-select-option>
+
       </ion-select>
     </ion-item>
     <ion-item>
@@ -52,13 +54,12 @@
         </ion-col>
         <ion-col>
           {{item.name}} <br>
-          {{item.price}} BD 
+          {{item.price}} BD
         </ion-col>
         <ion-col style="align-self: flex-end;">
           <ion-icon *ngFor='let i of counter(item.rating)' name='star'></ion-icon>
           <ion-icon *ngIf='item.rating % 1 != 0 && item.rating!=0' name="star-half-outline"></ion-icon>
           <ion-icon *ngFor='let i of counter(5-item.rating)' name='star-outline'></ion-icon>
-          ({{item.counter}})
         </ion-col>
       </ion-row>
     </ion-grid>
