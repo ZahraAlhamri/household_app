@@ -41,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'updat-item',
-    loadChildren: () => import('./pages/updat-item/updat-item.module').then( m => m.UpdatItemPageModule)
+    loadChildren: () => import('./updat-item/updat-item.module').then( m => m.UpdatItemPageModule)
   },
   {
     path: 'item-details/:id',
@@ -52,22 +52,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
   {
-    path: 'addreviews/:id',
-    loadChildren: () => import('./pages/addreviews/addreviews.module').then( m => m.AddreviewsPageModule)
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
   },
   {
-    path: 'viewreviews/:id',
-    loadChildren: () => import('./pages/viewreviews/viewreviews.module').then( m => m.ViewreviewsPageModule)
+    path: 'wishlist',
+    loadChildren: () => import('./pages/wishlist/wishlist.module').then( m => m.WishlistPageModule)
   },
   {
-    path: 'adddiscount/:id',
-    loadChildren: () => import('./pages/adddiscount/adddiscount.module').then( m => m.AdddiscountPageModule)
+    path: 't-c',
+    loadChildren: () => import('./pages/t-c/t-c.module').then( m => m.TCPageModule)
   },
   {
-    path: 'viewdiscounts',
-    loadChildren: () => import('./pages/viewdiscounts/viewdiscounts.module').then( m => m.ViewdiscountsPageModule)
-  },
-{
     path: 'future',
     loadChildren: () => import('./pages/future/future.module').then( m => m.FuturePageModule)
   },

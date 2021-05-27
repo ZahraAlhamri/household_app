@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="language=='English'">settings</ion-title>
+    <ion-title *ngIf="language=='عربي'"> اعدادات </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,7 +13,7 @@
     <ion-card-header *ngIf="language=='English'">
       Select a language
     </ion-card-header>
-    <ion-card-header *ngIf="language=='عربي'">
+    <ion-card-header style="text-align: right;" *ngIf="language=='عربي'">
       اختر احدى اللغتين التاليتين
     </ion-card-header>
     <ion-card-content>
@@ -28,3 +32,10 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+<ion-footer>
+  <ion-toolbar routerLink="/forget-password" routerDirection= "forward" style="text-align: center; outline: none;">
+    <ion-title style="color: white;" *ngIf="language=='English'">Reset Password</ion-title>
+    <ion-title style="color: white;" *ngIf="language=='عربي'">اعادة تعيين كلمة المرور</ion-title>
+
+  </ion-toolbar>
+</ion-footer>

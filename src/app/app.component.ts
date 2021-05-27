@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Platform, ToastController } from '@ionic/angular';
+//import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+//import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService } from '../app/provider/authentication.service';
 import { NavController } from '@ionic/angular';@Component({
   selector: 'app-root',
@@ -21,6 +23,13 @@ export class AppComponent {
   public uType = localStorage.getItem('uType');
   language =localStorage.getItem('language');
 
+/*   public appPages = [
+    {
+      title: 'Edit Profile',
+      url: '/edit-profile',
+      icon: 'person'
+    }
+  ]; */
   message;
   username;
   uid;
@@ -28,10 +37,13 @@ export class AppComponent {
 
   constructor(
     private platform: Platform,
+    //private splashScreen: SplashScreen,
+    //private statusBar: StatusBar,
     private authService: AuthenticationService,
     private navCtrl: NavController,
     private toastController: ToastController
   ) {
+    //this.initializeApp();
   }
  logout(){
     console.log('logout');
@@ -49,6 +61,13 @@ export class AppComponent {
     })
   }
 
+  /* initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  } */
+
   ngOnInit() {
     this.uType = localStorage.getItem('uType');
     this.uid = localStorage.getItem('uid');
@@ -65,6 +84,4 @@ export class AppComponent {
     });
     toast.present();
   }
-
-
 }

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Future Products</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3 style="text-align: center;">
+    Coming soon!!
+  </h3>
+    <ion-card *ngFor="let item of items" routerLink= '/item-details/{{item.id}}'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-avatar style="margin: auto;">
+            <img *ngIf="item.photo" [src]="item.photo">
+            <img *ngIf="!item.photo" src="../../../assets/images/item.png">
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          {{item.name}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

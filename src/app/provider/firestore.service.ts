@@ -21,10 +21,10 @@ export class FirestoreService {
   private BestSelleritemsCollection: AngularFirestoreCollection<Request>;
   private wishlistCollection: AngularFirestoreCollection<Request>;
   private itemsCollection: AngularFirestoreCollection<Request>;
+  private itemsFCollection: AngularFirestoreCollection<Request>;
+  private cartCollection: AngularFirestoreCollection<Request>;
   item: Observable<any[]>;
   private itemCollection: AngularFirestoreCollection<Request>;
-  reviews: Observable<any[]>;
-  private reviewsCollection: AngularFirestoreCollection<Request>;
   constructor(public db: AngularFirestore) {   }
   registerUserDetails(uid,user){
     console.log('here in user register details ',uid);
@@ -35,11 +35,6 @@ export class FirestoreService {
     console.log('item here', item);
     return this.db.collection('items').add(item);
   }
-  addreview(id,review){
-    console.log('item here', review);
-    return this.db.collection('items').doc(id).collection('reviews').add(review);
-  }
-
   getItems(){
     this.itemsCollection= this.db.collection<Request>('items')
     this.items= this.itemsCollection.snapshotChanges().pipe(
@@ -53,15 +48,26 @@ export class FirestoreService {
     );
     return this.items;
   }
+  getFutureItems(){
+    this.itemsFCollection= this.db.collection<any>('items', ref=> ref.where('status', '==', 'Future'))
+    this.itemsCollection= this.db.collection<Request>('items')
+    this.Fitems= this.itemsFCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.Fitems;
+  }
   getItem(id){
     console.log(id);
     return this.db.collection<any>('items').doc(id);
   }
-  hideItem(id){
+  deletItem(id){
     return this.db.collection('items').doc(id).update({"status": "Unavailable"});
-  }
-  deleteItem(id){
-    return this.db.collection('items').doc(id).delete();
   }
   recoveryItem(id){
     return this.db.collection('items').doc(id).update({"status": "Available"});
@@ -79,34 +85,61 @@ export class FirestoreService {
       }
     );
   }
-
-  updaterating(id,rating,counter){
-    return this.db.collection('items').doc(id).update(
-      {
-       "rating": rating,
-       "counter": counter,
-
-      }
-    );
+  addToCart(uid,pid,qty){
+    let found=false
+    this.getCart(uid).pipe(take(1)).
+          subscribe(res=>{res.forEach(item=>{if(!found){
+                if(item.itemID==pid){
+                  this.db.collection('users').doc(uid).collection('cart').doc(item.id).
+                      update({quantity: item.quantity+qty});
+                      found=true;
+                }}
+          });if(!found)
+            this.db.collection('users').doc(uid).collection('cart').add({itemID:pid,quantity:qty});})
   }
-  getReviews(id){
-    this.reviewsCollection= this.db.collection<Request>('items').doc(id).collection('reviews')
-    this.reviews= this.reviewsCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-  }));return this.reviews;
+  getCart(uid){
+    this.cartCollection= this.db.collection<Request>('users').doc(uid).collection('cart')
+    this.cart= this.cartCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+  }));return this.cart;
 }
+deleteFromCart(uid,cartItemID){
+  return this.db.collection('users').doc(uid).collection('cart').doc(cartItemID).delete();
+}
+  getWishlist(uid){
+    let wishlistCollection= this.db.collection<Request>('users').doc(uid).collection('wishlist')
+    this.wishlist= wishlistCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+    }));
+    return this.wishlist;
+  }
+  addToWishlist(uid,pid){
+    let found=false
+    this.getWishlist(uid).
+          subscribe(res=>{res.forEach(item=>{if(!found){
+                if(item.itemID==pid){
+                      found=true;
+                }}
+          });if(!found)
+            this.db.collection('users').doc(uid).collection('wishlist').add({itemID:pid});})
+  }
+  deleteFromwishlist(usid,ItemID){
+    return this.db.collection('users').doc(usid).collection('wishlist').doc(ItemID).delete();
+  }
+  updateCart(uid,cartItemID,pid,qty){
+    return this.db.collection('users').doc(uid).collection('cart').doc(cartItemID).update({quantity: qty});
 
-updatediscount(id,percentage,duration){
-  return this.db.collection('items').doc(id).update({
-    "percentage" : percentage,
-    "duration" : duration
-  });
-}
+  }
 
   getBestItems(){
     this.BestSelleritemsCollection= this.db.collection<any>('items', ref=> ref.where('price', '<=', '2'))
