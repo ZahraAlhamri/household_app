@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="/consumer-home"> </ion-back-button>
+
+    <ion-title>View Discounts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let item of items">
+    <ion-card *ngIf='item.percentage!=0'>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-avatar style="margin: auto;">
+          <img *ngIf="item.photo" [src]="item.photo">
+            <img *ngIf="!item.photo" src="../../../assets/images/item.png">
+          </ion-avatar> 
+        </ion-col>  
+        <ion-col>
+         name:  {{item.name}} <br>
+         Rating: {{item.rating}} ({{item.counter}}) <br>
+         Price Before: {{item.price}} BD <br>
+         Discount: {{item.percentage}} <br>
+         Price After: {{getnewprice(item.price,item.percentage)}}
+         </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  </div>
+</ion-content>

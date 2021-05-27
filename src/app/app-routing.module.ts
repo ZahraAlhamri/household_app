@@ -62,7 +62,12 @@ const routes: Routes = [
   {
     path: 'adddiscount/:id',
     loadChildren: () => import('./pages/adddiscount/adddiscount.module').then( m => m.AdddiscountPageModule)
+  },
+  {
+    path: 'viewdiscounts',
+    loadChildren: () => import('./pages/viewdiscounts/viewdiscounts.module').then( m => m.ViewdiscountsPageModule)
   }
+
 
 
 

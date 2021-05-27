@@ -3,23 +3,27 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    
     <ion-title>consumer-home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+ <ion-card><ion-button expand="block" (click)="gotodiscounts()">View Discounted Items</ion-button></ion-card> 
   <ion-card *ngFor="let item of items" routerLink= '/item-details/{{item.id}}'>
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-avatar style="margin: auto;">
-            <img *ngIf="item.photo" [src]="item.photo">
+          <img *ngIf="item.photo" [src]="item.photo">
             <img *ngIf="!item.photo" src="../../../assets/images/item.png">
           </ion-avatar> 
-        </ion-col>
+        </ion-col>  
         <ion-col>
-          Item name: {{item.name}} <br>
-                Rating: {{item.rating}} ({{item.counter}})
+          {{item.name}} <br>
+          Price: {{item.price}} BD <br>
+          Rating: {{item.rating}} ({{item.counter}}) 
+
         </ion-col>
       </ion-row>
     </ion-grid>

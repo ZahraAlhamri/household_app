@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>adddiscount</ion-title>
+    <ion-back-button slot="start" defaultHref="/items-details"> </ion-back-button>
+
+    <ion-title>Add Discount</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
-</ion-content>
+  <ion-content>
+      <br><ion-item><ion-label position="floating">Discount Percentage: </ion-label><ion-input type="number" [(ngModel)]="perecntage" ></ion-input>
+      </ion-item>
+      <ion-item> <ion-label position="floating">Discount Duration(in minutes): </ion-label><ion-input type="number" [(ngModel)]="duration"  min="1" ></ion-input>
+      </ion-item>
+      <br>
+<ion-button (click)="addDiscount()" expand="block">Add Discount</ion-button>
+  </ion-content>

@@ -16,21 +16,14 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 @Component({
-  selector: 'app-adddiscount',
-  templateUrl: './adddiscount.page.html',
-  styleUrls: ['./adddiscount.page.scss'],
+  selector: 'app-viewdiscounts',
+  templateUrl: './viewdiscounts.page.html',
+  styleUrls: ['./viewdiscounts.page.scss'],
 })
-export class AdddiscountPage implements OnInit{
-
-  perecntage;
-  duration;
-  perecntagee;
-  durationn;
-  id;
-  uid;
-  msg: string = '';
-  successMessage: string = '';
-  errorMessage: string = '';
+export class ViewdiscountsPage implements OnInit{
+items=[];
+newprice;
+step1;
   constructor(private activatedRoute: ActivatedRoute,
     private navCtrl: NavController, 
     private authService: AuthenticationService, 
@@ -45,20 +38,21 @@ export class AdddiscountPage implements OnInit{
     ) { }
 
   ngOnInit() {
-    this.id=this.route.snapshot.paramMap.get('id');
-    this.uid = localStorage.getItem("uid");
+
+          this.firestore.getItems().subscribe(val=>{
+            this.items=[];
+            val.forEach(async element => {
+              this.items.push(element);
+          })
+          });
   }
 
-  addDiscount(){
-    this.firestore.updatediscount(this.id,this.perecntage, this.duration)
-    .then((res) => {
-      this.successMessage = "Discount Added successfully.";
-          this.navCtrl.navigateForward('merchant-home');
-    },
-    err=>{
-      console.log(err);
-      this.errorMessage = err.message;
-    })
-  };
+  getnewprice(x,y){
+    this.newprice=0;
+   this.newprice= (x -x * (y/100))
+    return this.newprice.toFixed(2)
+  }
+
 }
+
 

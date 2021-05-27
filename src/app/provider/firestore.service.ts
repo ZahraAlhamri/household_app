@@ -31,6 +31,7 @@ export class FirestoreService {
     console.log('item here', review);
     return this.db.collection('items').doc(id).collection('reviews').add(review);
   }
+
   getItems(){
     this.itemsCollection= this.db.collection<Request>('items')
     this.items= this.itemsCollection.snapshotChanges().pipe(
@@ -91,4 +92,12 @@ export class FirestoreService {
         });
   }));return this.reviews;
 }
+
+updatediscount(id,percentage,duration){
+  return this.db.collection('items').doc(id).update({
+    "percentage" : percentage,
+    "duration" : duration
+  });
+}
+
 }
