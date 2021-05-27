@@ -47,6 +47,7 @@ export class AppComponent {
   }
  logout(){
     console.log('logout');
+    
     this.authService.logoutUser()
     .then(res => {
       console.log(res);
@@ -54,6 +55,7 @@ export class AppComponent {
       this.message = "Logged out successfully"
       this.presentToast();
       this.navCtrl.navigateRoot('/welcome');
+      localStorage.removeUserDetails();
     },
     err=>{
       this.message = "Error logging out. Try again later"

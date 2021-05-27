@@ -14,6 +14,8 @@
         <img src="..\..\assets\images\{{offer}}">
       </ion-slide>
     </ion-slides>
+    <ion-button expand="block" (click)="gotodiscounts()">View Discounted Items</ion-button>
+
   </ion-card>
   <ion-item>
     <ion-searchbar placeholder="search products names" showCancelButton="never" color='light' (ionInput)="getItems($event)"></ion-searchbar>
@@ -49,13 +51,14 @@
           </ion-avatar>
         </ion-col>
         <ion-col>
-          {{item.name}}
-          {{item.price}}
+          {{item.name}} <br>
+          {{item.price}} BD 
         </ion-col>
         <ion-col style="align-self: flex-end;">
           <ion-icon *ngFor='let i of counter(item.rating)' name='star'></ion-icon>
           <ion-icon *ngIf='item.rating % 1 != 0 && item.rating!=0' name="star-half-outline"></ion-icon>
           <ion-icon *ngFor='let i of counter(5-item.rating)' name='star-outline'></ion-icon>
+          ({{item.counter}})
         </ion-col>
       </ion-row>
     </ion-grid>

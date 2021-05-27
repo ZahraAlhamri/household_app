@@ -16,7 +16,6 @@
       <div>
         <ion-button (click)="gotoview()" expand="block">view reviews</ion-button>
         <ion-button (click)="gotodiscount()" expand="block">Add discount</ion-button>
-        <ion-button expand="block" (click)="gotodiscounts()">View Discounted Items</ion-button>
         <ion-avatar style="margin: auto;">
           <img *ngIf="photo" [src]="photo">
         </ion-avatar>
@@ -98,12 +97,13 @@
 </ion-content>
 <!---------------------------------------------------------Consumer--------------------------------------------------------->
 <ion-content *ngIf="uType=='Consumer'">
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <ion-button (click)="gotoadd()">add review</ion-button>
-    <ion-button (click)="gotoview()">view reviews</ion-button>    <br/>    <br/>
-    <ion-button expand="block" (click)="gotodiscounts()">View Discounted Items</ion-button>
 
   <ion-card>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <ion-button (click)="gotoadd()">add review</ion-button>
+        <ion-button (click)="gotoview()">view reviews</ion-button>    <br/>    <br/>
+
     <br/>
     <ion-avatar style="margin: auto; height: 100px; width: 100px;">
       <img *ngIf="photo" [src]="photo">

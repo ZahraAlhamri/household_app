@@ -78,8 +78,7 @@ export class MerchantHomePage implements OnInit {
               this.items.push(element);
               this.originalitems.push(element)
               this.maxPrice=(element.price>this.maxPrice && element.status==this.segment)?element.price:this.maxPrice;
-          });this.filteredList={...this.items};this.priceRange.upper=this.maxPrice;
-          });
+            });this.filteredList=this.items;;this.priceRange.upper=this.maxPrice;          });
   }
   filter(){
     this.showFilter=(this.showFilter)?false:true;
@@ -155,4 +154,5 @@ export class MerchantHomePage implements OnInit {
 
     return new Array(Math.floor(i));
 }
+
 }

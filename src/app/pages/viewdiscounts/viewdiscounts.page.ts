@@ -49,7 +49,7 @@ step1;
 
   getnewprice(x,y){
     this.newprice=0;
-   this.newprice= (x -x * (y/100))
+   this.newprice= (Number(x) -Number(x) * (y/100))
     return this.newprice.toFixed(2)
   }
 

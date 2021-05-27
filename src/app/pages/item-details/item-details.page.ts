@@ -297,8 +297,6 @@ export class ItemDetailsPage implements OnInit {
     gotodiscount(){
       this.navCtrl.navigateForward('/adddiscount/'+this.id);
     }
-    gotodiscounts(){
-      this.navCtrl.navigateForward('/viewdiscounts');
-    }
+  
 
 }

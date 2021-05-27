@@ -134,4 +134,7 @@ export class ConsumerHomePage implements OnInit {
 }
 
 
+gotodiscounts(){
+  this.navCtrl.navigateForward('/viewdiscounts');
+}
 }
