@@ -19,16 +19,24 @@
               <ion-label>Future Products</ion-label>
             </ion-item>
           </ion-menu-toggle>
+         
           <ion-menu-toggle auto-hide="false" >
             <ion-item  lines="none" detail="false" routerLink="/cart" *ngIf="uType=='Consumer'" >
               <ion-icon slot="start" name="cart-outline" color="lturquoise"></ion-icon>
               <ion-label>Cart</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          
           <ion-menu-toggle auto-hide="false" >
             <ion-item  lines="none" detail="false" routerLink="/wishlist" *ngIf="uType=='Consumer'" >
               <ion-icon slot="start" name="heart-outline" color="lturquoise"></ion-icon>
               <ion-label>Wishist</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item  lines="none" detail="false" routerLink="/best-seller" *ngIf="uType=='Consumer'" >
+              <ion-icon slot="start" name="star" color="lturquoise"></ion-icon>
+              <ion-label>Best Seller</ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false"  *ngIf="uType != 'Receiver'" >

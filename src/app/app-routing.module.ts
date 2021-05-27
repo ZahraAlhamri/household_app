@@ -66,7 +66,16 @@ const routes: Routes = [
   {
     path: 'future',
     loadChildren: () => import('./pages/future/future.module').then( m => m.FuturePageModule)
+  },
+  {
+    path: 'best-seller',
+    loadChildren: () => import('./pages/best-seller/best-seller.module').then( m => m.BestSellerPageModule)
+  },
+  {
+    path: 'statistics',
+    loadChildren: () => import('./pages/statistics/statistics.module').then( m => m.StatisticsPageModule)
   }
+
 ];
 
 @NgModule({
