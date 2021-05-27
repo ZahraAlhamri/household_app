@@ -10,7 +10,7 @@
               <ion-icon slot="start" name="home-outline" color="lturquoise"></ion-icon>
               <ion-label>Home</ion-label>
             </ion-item>
-            <ion-item  lines="none" detail="false" routerLink="/admin-home" routerDirection= "forward" *ngIf="uType=='Admin'" >
+            <ion-item  lines="none" detail="false" routerLink="/merchant-home" routerDirection= "forward" *ngIf="uType=='Merchant'" >
               <ion-icon slot="start" name="person-outline" color="lturquoise"></ion-icon>
               <ion-label>Home</ion-label>
             </ion-item>
@@ -35,7 +35,7 @@
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false" >
             <ion-item  lines="none" detail="false" routerLink="/best-seller" *ngIf="uType=='Consumer'" >
-              <ion-icon slot="start" name="star" color="lturquoise"></ion-icon>
+              <ion-icon slot="start" name="star-outline" color="lturquoise"></ion-icon>
               <ion-label>Best Seller</ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -43,6 +43,12 @@
             <ion-item  lines="none" detail="false" routerLink="/edit-profile" routerDirection= "forward" >
               <ion-icon slot="start" name="person-outline" color="lturquoise"></ion-icon>
               <ion-label>Edit Profile</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item  lines="none" detail="false" routerLink="/statistics" routerDirection= "forward" *ngIf="uType=='Merchant'">
+              <ion-icon slot="start" name="document-text-outline" color="lturquoise"></ion-icon>
+              <ion-label>Statistics</ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false" >
