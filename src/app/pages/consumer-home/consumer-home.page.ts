@@ -133,4 +133,5 @@ export class ConsumerHomePage implements OnInit {
     return new Array(Math.floor(i));
 }
 
+
 }

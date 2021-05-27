@@ -31,6 +31,7 @@
       </div>
       <ion-icon (click)='incQty()' size='small' name="add-circle-outline"></ion-icon>
     </ion-item>
+
     <ion-item>
       <ion-label>Price</ion-label>
       <ion-input [(ngModel)]="priceRange.lower" class="ion-no-margin rangeInput"></ion-input>
@@ -57,6 +58,13 @@
               </ion-col>
               <ion-col>
                 {{item.name}}
+
+                {{item.price}}BD
+              </ion-col>
+              <ion-col style="align-self: flex-end;">
+                <ion-icon *ngFor='let i of counter(item.rating)' name='star'></ion-icon>
+                <ion-icon *ngIf='item.rating % 1 != 0 && item.rating!=0' name="star-half-outline"></ion-icon>
+                <ion-icon *ngFor='let i of counter(5-item.rating)' name='star-outline'></ion-icon>
               </ion-col>
             </ion-row>
           </ion-grid>

@@ -74,6 +74,37 @@ const routes: Routes = [
   {
     path: 'statistics',
     loadChildren: () => import('./pages/statistics/statistics.module').then( m => m.StatisticsPageModule)
+  },
+  {
+
+    path: 'addreviews/:id',
+
+    loadChildren: () => import('./pages/addreviews/addreviews.module').then( m => m.AddreviewsPageModule)
+
+  },
+
+  {
+
+    path: 'viewreviews/:id',
+
+    loadChildren: () => import('./pages/viewreviews/viewreviews.module').then( m => m.ViewreviewsPageModule)
+
+  },
+
+  {
+
+    path: 'adddiscount/:id',
+
+    loadChildren: () => import('./pages/adddiscount/adddiscount.module').then( m => m.AdddiscountPageModule)
+
+  },
+
+  {
+
+    path: 'viewdiscounts',
+
+    loadChildren: () => import('./pages/viewdiscounts/viewdiscounts.module').then( m => m.ViewdiscountsPageModule)
+
   }
 
 ];

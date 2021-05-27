@@ -148,4 +148,11 @@ export class MerchantHomePage implements OnInit {
       this.qtyWidth='width: '+this.qtyCh+'ch';
     }
   }
+  gotodiscounts(){
+    this.navCtrl.navigateForward('/viewdiscounts');
+  }
+  counter(i: number) {
+
+    return new Array(Math.floor(i));
+}
 }

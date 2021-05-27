@@ -13,6 +13,8 @@ import 'firebase/firestore';
   providedIn: 'root'
 })
 export class FirestoreService {
+  reviews: Observable<any[]>;
+  private reviewsCollection: AngularFirestoreCollection<Request>;
   items: Observable<any[]>;
   Fitems: Observable<any[]>;
   cart: Observable<any[]>;
@@ -143,7 +145,7 @@ deleteFromCart(uid,cartItemID){
 
   getBestItems(){
     this.BestSelleritemsCollection= this.db.collection<any>('items', ref=> ref.where('price', '<=', '2'))
-   
+
     this.BestSelleritems= this.BestSelleritemsCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -155,4 +157,69 @@ deleteFromCart(uid,cartItemID){
     );
     return this.BestSelleritems;
   }
+  addreview(id,review){
+
+    console.log('item here', review);
+
+    return this.db.collection('items').doc(id).collection('reviews').add(review);
+
+  }
+
+  deleteItem(id){
+    return this.db.collection('items').doc(id).delete();
+  }
+
+  updaterating(id,rating,counter){
+
+    return this.db.collection('items').doc(id).update(
+
+      {
+
+       "rating": rating,
+
+       "counter": counter,
+
+
+
+      }
+
+    );
+
+  }
+
+  getReviews(id){
+
+    this.reviewsCollection= this.db.collection<Request>('items').doc(id).collection('reviews')
+
+    this.reviews= this.reviewsCollection.snapshotChanges().pipe(
+
+      map(actions => {
+
+        return actions.map(a => {
+
+          const data = a.payload.doc.data();
+
+          const id = a.payload.doc.id;
+
+          return { id, ...data };
+
+        });
+
+  }));return this.reviews;
+
+}
+
+
+
+updatediscount(id,percentage,duration){
+
+  return this.db.collection('items').doc(id).update({
+
+    "percentage" : percentage,
+
+    "duration" : duration
+
+  });
+
+}
 }

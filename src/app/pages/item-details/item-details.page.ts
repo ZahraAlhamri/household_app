@@ -273,5 +273,32 @@ export class ItemDetailsPage implements OnInit {
     else
       this.presentAlertConfirm();
   }
+  mDelete(){
+    this.firestore.deleteItem(this.id).then((res) => {
+      this.msg="the item has been deleted successfully";
+      this.presentToast();
+      this.navCtrl.navigateForward('merchant-home');
+    }, err => {
+       this.msg = err.message;
+      this.hideLoader();
+      this.presentToast();
+    });
+  }
+
+ gotoadd(){
+
+      this.navCtrl.navigateForward('/addreviews/'+this.id);
+
+    }
+
+    gotoview(){
+      this.navCtrl.navigateForward('/viewreviews/'+this.id);
+    }
+    gotodiscount(){
+      this.navCtrl.navigateForward('/adddiscount/'+this.id);
+    }
+    gotodiscounts(){
+      this.navCtrl.navigateForward('/viewdiscounts');
+    }
 
 }
