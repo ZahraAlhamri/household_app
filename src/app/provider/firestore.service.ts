@@ -6,12 +6,20 @@ import { AngularFirestore, 
   DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
   items: Observable<any[]>;
+  Fitems: Observable<any[]>;
+  cart: Observable<any[]>;
+  wishlist: Observable<any[]>;
+  BestSelleritems: Observable<any[]>;
+  private BestSelleritemsCollection: AngularFirestoreCollection<Request>;
+  private wishlistCollection: AngularFirestoreCollection<Request>;
   private itemsCollection: AngularFirestoreCollection<Request>;
   item: Observable<any[]>;
   private itemCollection: AngularFirestoreCollection<Request>;
@@ -100,4 +108,18 @@ updatediscount(id,percentage,duration){
   });
 }
 
+  getBestItems(){
+    this.BestSelleritemsCollection= this.db.collection<any>('items', ref=> ref.where('price', '<=', '2'))
+   
+    this.BestSelleritems= this.BestSelleritemsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+    return this.BestSelleritems;
+  }
 }
